@@ -1,25 +1,26 @@
-export interface Tweet extends TweetBody {
-  _id: string;
-  createdAt: string;
-  updatedAt: string;
+interface Entity {
+  userName: string;
+  screenName?: string;
+  profileImg: string;
 }
 
-export interface TweetBody {
+interface Quote {
+  author: Entity;
   text: string;
-  username: string;
-  profileImg: string;
+}
+
+interface Section {
+  text: string;
+  quotes: Quote[];
+}
+
+export interface Tweet {
+  _id: string;
+  title: string;
+  subtitle?: string;
+  time: string;
+  publisher: Entity;
+  author: Entity;
   image?: string;
-}
-
-export interface Comment extends CommentBody {
-  _id: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface CommentBody {
-  text: string;
-  username: string;
-  profileImg: string;
-  tweetId: any;
+  sections?: Section[];
 }

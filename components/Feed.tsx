@@ -3,7 +3,7 @@ import { RefreshIcon } from '@heroicons/react/outline';
 import TweetBox from './TweetBox';
 import TweetComponent from './Tweet';
 import { Tweet } from '../typings';
-import { fetchTweets } from '../utils/fetchTweets';
+import { fetchTweets } from '../utils/fetch';
 import toast from 'react-hot-toast';
 
 interface Props {
@@ -14,7 +14,7 @@ function Feed({ tweets: tweetsProp }: Props) {
   const [tweets, setTweets] = useState<Tweet[]>(tweetsProp);
   const handleRefresh = async () => {
     const refreshToast = toast.loading('Refreshing...');
-    const tweets = await fetchTweets();
+    const tweets = await fetchTweets('');
     toast.success('Feed Updated!', { id: refreshToast });
     setTweets(tweets);
   };
@@ -25,7 +25,7 @@ function Feed({ tweets: tweetsProp }: Props) {
         <h1 className="p-5 text-xl font-bold">Home</h1>
         <RefreshIcon
           onClick={handleRefresh}
-          className="mr-5 mt-5 h-8 w-8 
+          className="mr-5 mt-5 h-6 w-6 
           cursor-pointer text-twitter transition-all duration-500
           ease-out hover:rotate-180
           active:scale-125"
@@ -33,7 +33,7 @@ function Feed({ tweets: tweetsProp }: Props) {
       </div>
 
       <div>
-        <TweetBox />
+        <TweetBox setTweets={setTweets} />
       </div>
 
       <div>

@@ -3,7 +3,12 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["plugin:react/recommended", "google", "prettier"],
+  "extends": [
+    "eslint:recommended",    
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/react"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -17,6 +22,13 @@
     "require-jsdoc": 0,
     "react/react-in-jsx-scope": "off",
     "spaced-comment": ["error", "always", { "markers": ["/"] }],
-    "capIsNew": false
+    "capIsNew": false,
+    "react/prop-types": 0,
+    "no-console": 1
+  },
+  "settings": {
+    "react": {
+      "version": "detect" 
+    }
   }
 }

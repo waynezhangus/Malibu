@@ -11,26 +11,26 @@ interface Props {
   tweets: Tweet[];
 }
 
-const Home = ({ tweets }: Props) => {
+export default function Home({ tweets }: Props) {
   return (
-    <div className="mx-auto max-h-screen overflow-hidden lg:max-w-6xl">
+    <>
       <Head>
-        <title>Twitter Clone</title>
+        <title>Malibu Project</title>
       </Head>
-      <Toaster />
+      <div className="mx-auto max-h-screen overflow-hidden lg:max-w-6xl">
+        <Toaster />
 
-      <main className="grid grid-cols-9">
-        <Sidebar />
+        <main className="grid grid-cols-10">
+          <Sidebar />
 
-        <Feed tweets={tweets} />
+          <Feed tweets={tweets} />
 
-        <Widgets />
-      </main>
-    </div>
+          <Widgets />
+        </main>
+      </div>
+    </>
   );
-};
-
-export default Home;
+}
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const res = await fetch(`${process.env.NEXT_URL}api/tweets`);
