@@ -10,6 +10,9 @@ module.exports = {
         twitter: '#00ADED',
       },
     },
+    fontFamily: {
+      'sans': ['Helvetica', 'Arial', 'sans-serif'],
+    }
   },
   variants: {
     extend: {

@@ -7,15 +7,6 @@ interface Props {
 }
 
 export default function TweetComponent({ tweet }: Props) {
-  // const refreshComments = async () => {
-  //   const comments: Comment[] = await fetchComments(tweet._id);
-  //   setComments(comments);
-  // };
-
-  // useEffect(() => {
-  //   refreshComments();
-  // }, []);
-
   return (
     <div className="border-t-2 border-gray-100">
       <SectionComponent

@@ -7,7 +7,7 @@
     "eslint:recommended",    
     "plugin:react/recommended",
     "prettier",
-    "prettier/react"
+    "plugin:@next/next/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -22,13 +22,18 @@
     "require-jsdoc": 0,
     "react/react-in-jsx-scope": "off",
     "spaced-comment": ["error", "always", { "markers": ["/"] }],
-    "capIsNew": false,
     "react/prop-types": 0,
-    "no-console": 1
+    "no-console": 1,
+    "no-unused-vars": 0,
+    "no-undef": 0,
+    "@next/next/no-img-element": 0
   },
   "settings": {
     "react": {
       "version": "detect" 
     }
+  },
+  "globals": {
+    "JSX": "readonly"
   }
 }

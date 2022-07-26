@@ -6,26 +6,25 @@ const fetchTweets = async (url: string) => {
     'https://malibu-server1.herokuapp.com/api/?' + new URLSearchParams({ url })
   );
   const data = await res.json();
-  console.log(data);
   return data;
 };
 
-const useTweets = (url: string) => {
-  const fetcher = (url: string) =>
-    fetch(
-      'https://malibu-server1.herokuapp.com/api/?' +
-        new URLSearchParams({ url })
-    ).then((res) => res.json());
+// const useTweets = (url: string) => {
+//   const fetcher = (url: string) =>
+//     fetch(
+//       'https://malibu-server1.herokuapp.com/api/?' +
+//         new URLSearchParams({ url })
+//     ).then((res) => res.json());
 
-  const { data, error } = useSWR(url, fetcher);
+//   const { data, error } = useSWR(url, fetcher);
 
-  console.log(data);
+//   console.log(data);
 
-  return {
-    tweets: data,
-    isLoading: !error && !data,
-    isError: error,
-  };
-};
+//   return {
+//     tweets: data,
+//     isLoading: !error && !data,
+//     isError: error,
+//   };
+// };
 
-export { fetchTweets, useTweets };
+export { fetchTweets };

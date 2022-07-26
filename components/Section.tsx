@@ -51,6 +51,7 @@ export default function SectionComponent({
             className="text-sm text-gray-500 hover:text-twitter"
             href={`https://twitter.com/${author.screenName}`}
             target="_blank"
+            rel="noreferrer"
           >
             @{author.screenName} ·
           </a>

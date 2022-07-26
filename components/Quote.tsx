@@ -27,6 +27,7 @@ export default function SectionComponent({ author, text, time }: Props) {
             className="text-sm text-gray-500 hover:text-twitter"
             href={`https://twitter.com/${author.screenName}`}
             target="_blank"
+            rel="noreferrer"
           >
             @{author.screenName} ·
           </a>
