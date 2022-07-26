@@ -14,8 +14,8 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-10 border-b bg-white">
-      <div className="flex w-full items-center px-6 py-7">
+    <header className="sticky top-0 z-10 flex flex-col items-center border-b bg-white">
+      <div className="flex w-full items-center px-6 pt-7 sm:pb-7">
         <Image
           className="cursor-pointer"
           src="/images/logotrans.png" // Route of the image file
@@ -25,8 +25,8 @@ export default function Header() {
           onClick={() => router.push('/')}
         />
         <form
-          className="ml-5 mr-5 flex max-w-3xl flex-grow items-start rounded-full 
-        border border-gray-200 px-5 py-2 shadow-md"
+          className="mx-5 hidden w-full max-w-3xl items-center rounded-full 
+          border border-gray-200 px-5 py-2 shadow-md sm:flex"
         >
           <input
             value={input}
@@ -36,12 +36,12 @@ export default function Header() {
           />
           <XIcon
             className="h-6 cursor-pointer text-gray-500 
-          transition-transform duration-100 hover:scale-125 sm:mr-3"
+            transition-transform duration-100 hover:scale-125 sm:mr-3"
             onClick={() => setInput('')}
           />
           <SearchIcon
             className="hidden h-5 border-l border-gray-300 
-          pl-4 text-blue-500 sm:inline-flex"
+            pl-4 text-blue-500 sm:inline-flex"
           />
           <button hidden type="submit" onClick={search}></button>
         </form>
@@ -51,6 +51,29 @@ export default function Header() {
             'https://yt3.ggpht.com/m8od2OcBuHTpgbmzGf1w0JXfb3e3hPJVTkaw8zyV86zO-ULTDQeiJMej8hx396BERzqfgRaMAQ=s88-c-k-c0x00ffffff-no-rj-mo'
           }
         />
+      </div>
+      <div className="w-full">
+        <form
+          className="m-5 flex items-center rounded-full 
+            border border-gray-200 px-5 py-2 shadow-md sm:hidden"
+        >
+          <input
+            value={input}
+            type="text"
+            className="flex-grow focus:outline-none"
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <XIcon
+            className="h-6 cursor-pointer text-gray-500 
+              transition-transform duration-100 hover:scale-125 sm:mr-3"
+            onClick={() => setInput('')}
+          />
+          <SearchIcon
+            className="hidden h-5 border-l border-gray-300 
+              pl-4 text-blue-500 sm:inline-flex"
+          />
+          <button hidden type="submit" onClick={search}></button>
+        </form>
       </div>
     </header>
   );
