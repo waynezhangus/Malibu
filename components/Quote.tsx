@@ -21,17 +21,19 @@ export default function SectionComponent({ author, text, time }: Props) {
       </div>
 
       <div>
-        <div className="flex items-center space-x-1">
+        <div className="flex flex-col items-center space-x-1 sm:flex-row">
           <p className="mr-1 text-sm font-bold">{author.userName}</p>
-          <a
-            className="text-sm text-gray-500 hover:text-twitter"
-            href={`https://twitter.com/${author.screenName}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            @{author.screenName} ·
-          </a>
-          <TimeAgo className="text-sm text-gray-500" date={time} />
+          <div>
+            <a
+              className="text-sm text-gray-500 hover:text-twitter"
+              href={`https://twitter.com/${author.screenName}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              @{author.screenName} ·
+            </a>
+            <TimeAgo className="pl-1 text-sm text-gray-500" date={time} />
+          </div>
         </div>
 
         <p className="pt-1 text-sm leading-tight">{text}</p>
