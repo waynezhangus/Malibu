@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-10 flex flex-col items-center border-b bg-white">
-      <div className="flex w-full items-center px-6 pt-7 sm:pb-7">
+      <div className="flex w-full items-center px-6 pt-2 sm:pt-7 sm:pb-7">
         <Image
           className="cursor-pointer"
           src="/images/logotrans.png" // Route of the image file
@@ -54,7 +54,7 @@ export default function Header() {
       </div>
       <div className="w-full">
         <form
-          className="m-5 flex items-center rounded-full 
+          className="my-2 mx-5 flex items-center rounded-full 
             border border-gray-200 px-5 py-2 shadow-md sm:hidden"
         >
           <input

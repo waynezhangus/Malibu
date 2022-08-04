@@ -15,13 +15,39 @@ export default function Home() {
     router.push(`/search?q=${input}`);
   };
 
+  if (
+    localStorage.theme === 'dark' ||
+    (!('theme' in localStorage) &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
+  ) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+
+  window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', (event) => {
+      if (event.matches) document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+    });
+
   return (
     <div className="flex h-screen flex-col items-center justify-center">
       <Head>
         <title>Malibu</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className="flex w-full justify-between p-5 pl-8 text-sm text-gray-700">
+      <video
+        className="fixed inset-0 -z-10 hidden dark:block"
+        autoPlay
+        muted
+        loop
+        id="bgVideo"
+      >
+        <source src="/Cosmos.mp4" type="video/mp4" />
+      </video>
+      <header className="flex w-full justify-between p-5 pl-8 text-sm text-gray-700 dark:text-gray-50">
         <div className="flex items-center space-x-4">
           <a className="link">About</a>
           <a className="link">Settings</a>
@@ -43,23 +69,34 @@ export default function Home() {
         </div>
       </header>
       <form className="mt-44 flex w-4/5 flex-grow flex-col items-center">
-        <Image
-          src="/images/logotrans.png" // Route of the image file
-          height={100} // Desired size with correct aspect ratio
-          width={300} // Desired size with correct aspect ratio
-          alt="Malibu Logo"
-        />
+        <div className="hidden dark:block">
+          <Image
+            src="/images/logowhite.png" // Route of the image file
+            height={100} // Desired size with correct aspect ratio
+            width={300} // Desired size with correct aspect ratio
+            alt="Malibu Logo"
+          />
+        </div>
+        <div className="dark:hidden">
+          <Image
+            src="/images/logotrans.png" // Route of the image file
+            height={100} // Desired size with correct aspect ratio
+            width={300} // Desired size with correct aspect ratio
+            alt="Malibu Logo"
+          />
+        </div>
+
         <div
           className="mt-5 flex w-full max-w-md items-center space-x-3 rounded-full 
         border border-gray-200 px-5 py-2 focus-within:shadow-lg hover:shadow-md 
         sm:max-w-xl lg:max-w-2xl"
         >
-          <SearchIcon className="h-5 text-gray-500" />
+          <SearchIcon className="h-5 text-gray-500 dark:text-gray-50" />
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             type="text"
-            className="flex-grow focus:outline-none"
+            className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
           />
         </div>
         <div className="mt-8 flex w-1/2 flex-col justify-center space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
