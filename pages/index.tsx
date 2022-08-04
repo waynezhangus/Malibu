@@ -42,7 +42,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <video
-        className="fixed inset-0 -z-10 hidden dark:block"
+        className="fixed inset-0 -z-10 hidden min-h-full min-w-full object-cover dark:block"
         autoPlay
         muted
         loop
