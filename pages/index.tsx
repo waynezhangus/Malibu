@@ -15,7 +15,7 @@ export default function Home() {
     router.push(`/search?q=${input}`);
   };
 
-  const settingJson = localStorage.getItem('settings');
+  const settingJson = window.localStorage.getItem('settings');
   const settings = settingJson ? JSON.parse(settingJson) : {};
   if (
     settings?.theme === 'dark' ||
