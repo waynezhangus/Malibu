@@ -15,9 +15,11 @@ export default function Home() {
     router.push(`/search?q=${input}`);
   };
 
+  const settingJson = localStorage.getItem('settings');
+  const settings = settingJson ? JSON.parse(settingJson) : {};
   if (
-    localStorage.theme === 'dark' ||
-    (!('theme' in localStorage) &&
+    settings?.theme === 'dark' ||
+    (!settings?.theme &&
       window.matchMedia('(prefers-color-scheme: dark)').matches)
   ) {
     document.documentElement.classList.add('dark');
