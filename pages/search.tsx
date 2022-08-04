@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React from 'react';
+import * as React from 'react';
 import Header from '../components/Header';
 import TweetComponent from '../components/Tweet';
 import { Tweet } from '../typings';
@@ -9,6 +9,26 @@ interface Props {
 }
 
 export default function Search({ tweet }: Props) {
+  React.useEffect(() => {
+    const settingJson = localStorage.getItem('settings');
+    const settings = settingJson ? JSON.parse(settingJson) : {};
+    if (
+      settings?.theme === 'dark' ||
+      (!settings?.theme &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (event) => {
+        if (event.matches) document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+      });
+  }, []);
+
   return (
     <div className="w-full dark:bg-[#202124]">
       <Head>
