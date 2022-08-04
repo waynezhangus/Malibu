@@ -14,16 +14,28 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-10 flex flex-col items-center border-b bg-white">
+    <header className="sticky top-0 z-10 flex flex-col items-center border-b bg-white dark:bg-[#202124]">
       <div className="flex w-full items-center px-6 pt-2 sm:pt-7 sm:pb-7">
-        <Image
-          className="cursor-pointer"
-          src="/images/logotrans.png" // Route of the image file
-          height={40} // Desired size with correct aspect ratio
-          width={120} // Desired size with correct aspect ratio
-          alt="Malibu Logo"
-          onClick={() => router.push('/')}
-        />
+        <div className="hidden dark:block">
+          <Image
+            className="cursor-pointer"
+            src="/images/logowhite.png" // Route of the image file
+            height={40} // Desired size with correct aspect ratio
+            width={120} // Desired size with correct aspect ratio
+            alt="Malibu Logo"
+            onClick={() => router.push('/')}
+          />
+        </div>
+        <div className="dark:hidden">
+          <Image
+            className="cursor-pointer"
+            src="/images/logotrans.png" // Route of the image file
+            height={40} // Desired size with correct aspect ratio
+            width={120} // Desired size with correct aspect ratio
+            alt="Malibu Logo"
+            onClick={() => router.push('/')}
+          />
+        </div>
         <form
           className="mx-5 hidden w-full max-w-3xl items-center rounded-full 
           border border-gray-200 px-5 py-2 shadow-md sm:flex"
@@ -31,12 +43,12 @@ export default function Header() {
           <input
             value={input}
             type="text"
-            className="flex-grow focus:outline-none"
+            className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
             onChange={(e) => setInput(e.target.value)}
           />
           <XIcon
-            className="h-6 cursor-pointer text-gray-500 
-            transition-transform duration-100 hover:scale-125 sm:mr-3"
+            className="h-6 cursor-pointer text-gray-500 transition-transform
+            duration-100 hover:scale-125 dark:text-gray-50 sm:mr-3"
             onClick={() => setInput('')}
           />
           <SearchIcon

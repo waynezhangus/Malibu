@@ -10,7 +10,7 @@ interface Props {
 
 export default function Search({ tweet }: Props) {
   return (
-    <div className="w-full">
+    <div className="w-full dark:bg-[#202124]">
       <Head>
         <title>Analyze Results</title>
         <link rel="icon" href="/favicon.ico" />

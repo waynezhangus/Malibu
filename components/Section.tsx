@@ -31,7 +31,10 @@ export default function SectionComponent({
   const [input, setInput] = useState<string>('');
 
   return (
-    <div className="flex space-x-3 p-3 hover:bg-gray-100" id={id}>
+    <div
+      className="flex space-x-3 p-3 hover:bg-gray-100 dark:hover:bg-zinc-900"
+      id={id}
+    >
       <div className="relative shrink-0">
         <a
           href={`https://twitter.com/${author.screenName}`}
@@ -50,7 +53,7 @@ export default function SectionComponent({
         ></a>
       </div>
 
-      <div className="flex-1">
+      <div className="flex-1 dark:text-gray-50">
         <div className="flex items-center space-x-1">
           <a
             className="mr-1 text-sm font-bold hover:text-twitter"

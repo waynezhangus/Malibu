@@ -88,7 +88,6 @@ export default function Home() {
             alt="Malibu Logo"
           />
         </div>
-
         <div
           className="mt-5 flex w-full max-w-md items-center space-x-3 rounded-full 
         border border-gray-200 px-5 py-2 focus-within:shadow-lg hover:shadow-md 
