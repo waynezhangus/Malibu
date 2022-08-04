@@ -11,7 +11,7 @@ interface Quote {
 
 interface Section {
   text: string;
-  quotes: Quote[];
+  quotes?: Quote[];
 }
 
 export interface Tweet {

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Entity, Quote, Tweet } from '../typings';
+import { Entity, Section } from '../typings';
 import QuoteComponent from './Quote';
 import TimeAgo from 'react-timeago';
+import { useRouter } from 'next/router';
 import {
   ChatIcon,
   HeartIcon,
@@ -9,13 +10,11 @@ import {
   UploadIcon,
 } from '@heroicons/react/outline';
 
-interface Props {
+interface Props extends Section {
   id: string;
   author: Entity;
-  text: string;
-  time: string;
+  time?: string;
   image?: string;
-  quotes?: Quote[];
 }
 
 export default function SectionComponent({
@@ -26,6 +25,7 @@ export default function SectionComponent({
   image,
   quotes,
 }: Props) {
+  const router = useRouter();
   const [comments, setComments] = useState<Comment[]>([]);
   const [commentBoxVisible, setCommentBoxVisible] = useState<boolean>(false);
   const [input, setInput] = useState<string>('');
@@ -33,29 +33,47 @@ export default function SectionComponent({
   return (
     <div className="flex space-x-3 p-3 hover:bg-gray-100" id={id}>
       <div className="relative shrink-0">
-        <img
-          className="mt-1 h-10 w-10 rounded-full object-cover"
-          src={author.profileImg}
-          alt="Publisher Image"
-        />
+        <a
+          href={`https://twitter.com/${author.screenName}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            className="mt-1 h-10 w-10 rounded-full object-cover hover:opacity-75"
+            src={author.profileImg}
+            alt="Publisher Image"
+          />
+        </a>
         <a
           className="absolute top-[44px] left-[17.5px] h-[calc(100%_-_14px)] w-[5px] border-x-2 border-solid border-transparent bg-gray-300 bg-clip-padding hover:bg-gray-500"
           href={'#' + id}
         ></a>
       </div>
 
-      <div>
+      <div className="flex-1">
         <div className="flex items-center space-x-1">
-          <p className="mr-1 text-sm font-bold">{author.userName}</p>
           <a
-            className="text-sm text-gray-500 hover:text-twitter"
+            className="mr-1 text-sm font-bold hover:text-twitter"
             href={`https://twitter.com/${author.screenName}`}
             target="_blank"
             rel="noreferrer"
           >
-            @{author.screenName} ·
+            {author.userName}
           </a>
-          <TimeAgo className="text-sm text-gray-500" date={time} />
+          <a
+            className="text-sm text-gray-500"
+            href={`https://twitter.com/${author.screenName}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            @{author.screenName}
+          </a>
+          {time && (
+            <div>
+              <span className="text-sm text-gray-500">&middot;&nbsp;</span>
+              <TimeAgo className="text-sm text-gray-500" date={time} />
+            </div>
+          )}
         </div>
 
         <p className="pt-1 text-sm leading-tight">{text}</p>
@@ -74,7 +92,6 @@ export default function SectionComponent({
                 key={id + index}
                 author={quote.author}
                 text={quote.text}
-                time={time}
               />
             ))}
           </div>
@@ -83,7 +100,7 @@ export default function SectionComponent({
         <div className="mt-3 flex justify-between">
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400">
             <ChatIcon className="h-5 w-5" />
-            <p>5</p>
+            <p className="pt-0.5 text-sm">5</p>
           </div>
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400">
             <SwitchHorizontalIcon className="h-5 w-5" />

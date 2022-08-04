@@ -31,7 +31,6 @@ export async function getServerSideProps(context: any) {
   let data;
   if (res.ok) {
     data = await res.json();
-    console.log(data);
   } else {
     console.log(res.status, res.statusText);
   }
