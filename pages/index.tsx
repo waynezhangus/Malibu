@@ -27,14 +27,13 @@ export default function Home() {
     } else {
       document.documentElement.classList.remove('dark');
     }
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (event) => {
+        if (event.matches) document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+      });
   }, []);
-
-  window
-    .matchMedia('(prefers-color-scheme: dark)')
-    .addEventListener('change', (event) => {
-      if (event.matches) document.documentElement.classList.add('dark');
-      else document.documentElement.classList.remove('dark');
-    });
 
   return (
     <div className="flex h-screen flex-col items-center justify-center">
