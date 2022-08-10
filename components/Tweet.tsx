@@ -8,18 +8,21 @@ interface Props {
 
 export default function TweetComponent({ tweet }: Props) {
   return (
-    <div className="border-t-2 border-gray-100">
+    <div className="border-x border-gray-200">
       <SectionComponent
         id={tweet._id + 'title'}
         author={tweet.publisher}
         text={tweet.title}
         time={tweet.time}
         image={tweet.image}
+        publisher
       />
       <SectionComponent
         id={tweet._id + 'subtitle'}
         author={tweet.author}
         text={tweet.subtitle ?? ''}
+        end
+        verified
       />
       {tweet.sections &&
         tweet.sections.map((section, index) => (
@@ -29,6 +32,7 @@ export default function TweetComponent({ tweet }: Props) {
             author={tweet.author}
             text={section.text}
             quotes={section.quotes}
+            end={index == tweet.sections.length - 1 ? true : false}
           />
         ))}
     </div>

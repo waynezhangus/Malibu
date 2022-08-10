@@ -4,14 +4,14 @@ interface Entity {
   profileImg: string;
 }
 
-interface Quote {
+interface Point {
   author: Entity;
   text: string;
 }
 
 interface Section {
-  text: string;
-  quotes?: Quote[];
+  text: string; // summary of the section
+  quotes?: Point[]; // quotes will be on level of sub-sections --> points
 }
 
 export interface Tweet {
@@ -22,5 +22,5 @@ export interface Tweet {
   publisher: Entity;
   author: Entity;
   image?: string;
-  sections?: Section[];
+  sections: Section[];
 }

@@ -1,7 +1,15 @@
 import React from 'react';
-import { Quote } from '../typings';
+import { Point } from '../typings';
 
-export default function QuoteComponent({ author, text }: Quote) {
+interface Props extends Point {
+  end?: boolean;
+}
+
+export default function SubSectionComponent({
+  author,
+  text,
+  end = false,
+}: Props) {
   return (
     <div className="mt-2 flex space-x-3">
       <div className="relative shrink-0">
@@ -16,7 +24,13 @@ export default function QuoteComponent({ author, text }: Quote) {
             alt="Writer Image"
           />
         </a>
-        <a className="absolute top-[44px] left-[17.5px] h-[calc(100%_-_32px)] w-[5px] border-x-2 border-solid border-transparent bg-gray-300 bg-clip-padding hover:bg-gray-500"></a>
+        {!end && (
+          <a
+            className="absolute top-[44px] left-[17.5px] h-[calc(100%_-_32px)] w-[5px] 
+              border-x-2 border-solid border-transparent 
+            bg-gray-300 bg-clip-padding hover:bg-gray-500"
+          ></a>
+        )}
       </div>
 
       <div>

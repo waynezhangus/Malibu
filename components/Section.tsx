@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
 import { Entity, Section } from '../typings';
-import QuoteComponent from './Quote';
+import SubSection from './SubSection';
 import TimeAgo from 'react-timeago';
 import { useRouter } from 'next/router';
 import {
@@ -9,30 +9,36 @@ import {
   SwitchHorizontalIcon,
   UploadIcon,
 } from '@heroicons/react/outline';
+import { LibraryIcon, BadgeCheckIcon } from '@heroicons/react/solid';
 
 interface Props extends Section {
   id: string;
   author: Entity;
   time?: string;
   image?: string;
+  end?: boolean;
+  publisher?: boolean;
+  verified?: boolean;
 }
 
 export default function SectionComponent({
   id,
   author,
-  text,
   time,
   image,
+  text,
   quotes,
+  end = false,
+  publisher = false,
+  verified = false,
 }: Props) {
-  const router = useRouter();
-  const [comments, setComments] = useState<Comment[]>([]);
-  const [commentBoxVisible, setCommentBoxVisible] = useState<boolean>(false);
-  const [input, setInput] = useState<string>('');
+  const [fold, setFold] = React.useState<boolean>(false);
 
   return (
     <div
-      className="flex space-x-3 p-3 hover:bg-gray-100 dark:hover:bg-zinc-900"
+      className={`flex space-x-3 p-3 hover:bg-gray-100 dark:hover:bg-zinc-900 ${
+        end && 'border-b border-gray-200'
+      }`}
       id={id}
     >
       <div className="relative shrink-0">
@@ -47,14 +53,30 @@ export default function SectionComponent({
             alt="Publisher Image"
           />
         </a>
-        <a
-          className="absolute top-[44px] left-[17.5px] h-[calc(100%_-_14px)] w-[5px] border-x-2 border-solid border-transparent bg-gray-300 bg-clip-padding hover:bg-gray-500"
-          href={'#' + id}
-        ></a>
+        {!end && (
+          <a
+            className={`absolute top-[44px] left-[17.5px] h-[calc(100%_-_16px)] w-[5px]
+              border-x-2 border-solid 
+              ${
+                quotes && quotes.length > 0 && fold
+                  ? 'border-gray-200 bg-twitter'
+                  : 'border-transparent bg-gray-300'
+              } 
+             bg-clip-padding hover:bg-gray-500`}
+            onClick={() => {
+              setFold(!fold);
+              document
+                .getElementById(id)
+                ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }}
+          />
+        )}
       </div>
 
       <div className="flex-1 dark:text-gray-50">
         <div className="flex items-center space-x-1">
+          {publisher && <LibraryIcon className="h-4 text-twitter" />}
+          {verified && <BadgeCheckIcon className="h-4 text-twitter" />}
           <a
             className="mr-1 text-sm font-bold hover:text-twitter"
             href={`https://twitter.com/${author.screenName}`}
@@ -80,6 +102,14 @@ export default function SectionComponent({
         </div>
 
         <p className="pt-1 text-sm leading-tight">{text}</p>
+        {quotes && quotes.length > 0 && fold && (
+          <p
+            className="cursor-pointer pt-1 text-sm leading-tight text-twitter"
+            onClick={() => setFold(false)}
+          >
+            Show more points
+          </p>
+        )}
         {image && (
           <img
             className="m-3 ml-0 mb-1 max-h-60 rounded-lg object-cover shadow-sm"
@@ -88,17 +118,21 @@ export default function SectionComponent({
           />
         )}
 
-        {quotes && typeof quotes.length === 'number' && quotes.length > 0 && (
-          <div>
-            {quotes?.map((quote, index) => (
-              <QuoteComponent
-                key={id + index}
-                author={quote.author}
-                text={quote.text}
-              />
-            ))}
-          </div>
-        )}
+        {quotes &&
+          typeof quotes.length === 'number' &&
+          quotes.length > 0 &&
+          !fold && (
+            <div>
+              {quotes?.map((quote, index) => (
+                <SubSection
+                  key={id + index}
+                  author={quote.author}
+                  text={quote.text}
+                  end={index == quotes.length - 1 ? true : false}
+                />
+              ))}
+            </div>
+          )}
 
         <div className="mt-3 flex justify-between">
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400">
