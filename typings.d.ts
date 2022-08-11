@@ -10,6 +10,7 @@ interface Point {
 }
 
 interface Section {
+  image?: string;
   points: Point[]; // quotes will be on level of sub-sections --> points
 }
 

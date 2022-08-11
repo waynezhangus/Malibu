@@ -32,31 +32,7 @@ export default function handler(
       },
       image:
         'https://www.popsci.com/uploads/2020/03/25/Y5VQ2BU4WBGYJHKS3SNFWEBBKA.jpg',
-      sections: [
-        {
-          text: 'This is just for testing',
-          quotes: [
-            {
-              author: {
-                userName: 'Anthony Fauci',
-                screenName: 'NIAIDNews',
-                profileImg:
-                  'http://pbs.twimg.com/profile_images/1239931973260492805/RrDAtYcl_normal.jpg',
-              },
-              text: 'Clearly, in South Africa, Omicron has a transmission advantage.',
-            },
-            {
-              author: {
-                userName: 'Anthony Fauci',
-                screenName: 'NIAIDNews',
-                profileImg:
-                  'http://pbs.twimg.com/profile_images/1239931973260492805/RrDAtYcl_normal.jpg',
-              },
-              text: 'Although it’s too early to make any definitive statements about it, thus far it does not look like there’s a great degree of severity to it.',
-            },
-          ],
-        },
-      ],
+      sections: [],
     },
   ];
   res.status(200).json({ tweets });
