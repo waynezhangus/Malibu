@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Entity, Section } from '../typings';
+import { Entity, Point } from '../typings';
 import SubSection from './SubSection';
 import TimeAgo from 'react-timeago';
 import { useRouter } from 'next/router';
@@ -11,9 +11,11 @@ import {
 } from '@heroicons/react/outline';
 import { LibraryIcon, BadgeCheckIcon } from '@heroicons/react/solid';
 
-interface Props extends Section {
+interface Props {
   id: string;
   author: Entity;
+  text: string;
+  points?: Point[];
   time?: string;
   image?: string;
   end?: boolean;
@@ -24,10 +26,10 @@ interface Props extends Section {
 export default function SectionComponent({
   id,
   author,
+  text,
   time,
   image,
-  text,
-  quotes,
+  points,
   end = false,
   publisher = false,
   verified = false,
@@ -58,7 +60,7 @@ export default function SectionComponent({
             className={`absolute top-[44px] left-[17.5px] h-[calc(100%_-_16px)] w-[5px]
               border-x-2 border-solid 
               ${
-                quotes && quotes.length > 0 && fold
+                points && points.length > 0 && fold
                   ? 'border-gray-200 bg-twitter dark:border-gray-300'
                   : 'border-transparent bg-gray-300'
               } 
@@ -102,7 +104,7 @@ export default function SectionComponent({
         </div>
 
         <p className="pt-1 text-sm leading-tight">{text}</p>
-        {quotes && quotes.length > 0 && fold && (
+        {points && points.length > 0 && fold && (
           <p
             className="cursor-pointer pt-1 text-sm leading-tight text-twitter"
             onClick={() => setFold(false)}
@@ -118,17 +120,17 @@ export default function SectionComponent({
           />
         )}
 
-        {quotes &&
-          typeof quotes.length === 'number' &&
-          quotes.length > 0 &&
+        {points &&
+          typeof points.length === 'number' &&
+          points.length > 0 &&
           !fold && (
             <div>
-              {quotes?.map((quote, index) => (
+              {points?.map((point, index) => (
                 <SubSection
                   key={id + index}
-                  author={quote.author}
-                  text={quote.text}
-                  end={index == quotes.length - 1 ? true : false}
+                  author={point.author}
+                  text={point.text}
+                  end={index == points.length - 1 ? true : false}
                 />
               ))}
             </div>

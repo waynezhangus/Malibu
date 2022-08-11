@@ -29,9 +29,9 @@ export default function TweetComponent({ tweet }: Props) {
           <SectionComponent
             key={tweet._id + index}
             id={tweet._id + index}
-            author={tweet.author}
-            text={section.text}
-            quotes={section.quotes}
+            author={section.points[0].author}
+            text={section.points[0].text}
+            points={section.points.slice(1)}
             end={index == tweet.sections.length - 1 ? true : false}
           />
         ))}

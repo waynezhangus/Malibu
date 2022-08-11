@@ -10,8 +10,7 @@ interface Point {
 }
 
 interface Section {
-  text: string; // summary of the section
-  quotes?: Point[]; // quotes will be on level of sub-sections --> points
+  points: Point[]; // quotes will be on level of sub-sections --> points
 }
 
 export interface Tweet {
