@@ -59,7 +59,7 @@ export default function SectionComponent({
               border-x-2 border-solid 
               ${
                 quotes && quotes.length > 0 && fold
-                  ? 'border-gray-200 bg-twitter'
+                  ? 'border-gray-200 bg-twitter dark:border-gray-300'
                   : 'border-transparent bg-gray-300'
               } 
              bg-clip-padding hover:bg-gray-500`}

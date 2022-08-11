@@ -43,6 +43,8 @@ export default function Header() {
           <input
             value={input}
             type="text"
+            autoComplete="on"
+            name="URL"
             className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
             onChange={(e) => setInput(e.target.value)}
           />

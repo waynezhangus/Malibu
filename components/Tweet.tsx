@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
 import SectionComponent from './Section';
 import { Tweet } from '../typings';
 

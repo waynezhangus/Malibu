@@ -98,6 +98,8 @@ export default function Home() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             type="text"
+            autoComplete="on"
+            name="URL"
             className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
           />
         </div>

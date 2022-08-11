@@ -52,7 +52,7 @@ export async function getServerSideProps(context: any) {
   if (res.ok) {
     data = await res.json();
   } else {
-    console.log(res.status, res.statusText);
+    // console.log(res.status, res.statusText);
   }
   return {
     props: {
