@@ -103,7 +103,7 @@ export default function Home() {
             className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
           />
         </div>
-        <div className="mt-8 flex w-1/2 flex-col justify-center space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
+        <div className="mt-8 hidden w-1/2 flex-col justify-center space-y-2 sm:flex">
           <button onClick={search} type="submit" className="btn">
             Smart Analyze
           </button>
