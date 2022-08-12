@@ -39,10 +39,11 @@ export default function Header() {
         <form
           className="mx-5 hidden w-full max-w-3xl items-center rounded-full 
           border border-gray-200 px-5 py-2 shadow-md sm:flex"
+          action="/s"
         >
           <input
             value={input}
-            type="text"
+            type="search"
             autoComplete="on"
             name="URL"
             className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
@@ -70,10 +71,11 @@ export default function Header() {
         <form
           className="my-2 mx-5 flex items-center rounded-full 
             border border-gray-200 px-5 py-2 shadow-md sm:hidden"
+          action="/s"
         >
           <input
             value={input}
-            type="text"
+            type="search"
             autoComplete="on"
             name="URL"
             className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"

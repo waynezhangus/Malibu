@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { SearchIcon } from '@heroicons/react/outline';
 import Avatar from '../components/Avatar';
@@ -71,20 +70,21 @@ export default function Home() {
           />
         </div>
       </header>
-      <form className="mt-44 flex w-4/5 flex-grow flex-col items-center">
+      <form
+        className="mt-20 flex w-4/5 flex-grow flex-col items-center"
+        action="/s"
+      >
         <div className="hidden dark:block">
-          <Image
+          <img
+            className="h-20 sm:h-24"
             src="/images/logowhite.png" // Route of the image file
-            height={100} // Desired size with correct aspect ratio
-            width={300} // Desired size with correct aspect ratio
             alt="Malibu Logo"
           />
         </div>
         <div className="dark:hidden">
-          <Image
+          <img
+            className="h-20 sm:h-24"
             src="/images/logotrans.png" // Route of the image file
-            height={100} // Desired size with correct aspect ratio
-            width={300} // Desired size with correct aspect ratio
             alt="Malibu Logo"
           />
         </div>
@@ -97,9 +97,9 @@ export default function Home() {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            type="text"
             autoComplete="on"
             name="URL"
+            type="search"
             className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
           />
         </div>
