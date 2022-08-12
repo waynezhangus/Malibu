@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { SearchIcon } from '@heroicons/react/outline';
+import { SearchIcon, XIcon } from '@heroicons/react/outline';
 import Avatar from '../components/Avatar';
 import Footer from '../components/Footer';
 
@@ -71,19 +71,19 @@ export default function Home() {
         </div>
       </header>
       <form
-        className="mt-20 flex w-4/5 flex-grow flex-col items-center"
+        className="mt-10 flex w-[90%] flex-grow flex-col items-center sm:mt-20"
         action="/s"
       >
         <div className="hidden dark:block">
           <img
-            className="h-20 sm:h-24"
+            className="h-16 sm:h-24"
             src="/images/logowhite.png" // Route of the image file
             alt="Malibu Logo"
           />
         </div>
         <div className="dark:hidden">
           <img
-            className="h-20 sm:h-24"
+            className="h-16 sm:h-24"
             src="/images/logotrans.png" // Route of the image file
             alt="Malibu Logo"
           />
@@ -102,8 +102,13 @@ export default function Home() {
             type="search"
             className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
           />
+          <XIcon
+            className="h-6 cursor-pointer text-gray-500 transition-transform
+            duration-100 hover:scale-125 dark:text-gray-50 sm:mr-3"
+            onClick={() => setInput('')}
+          />
         </div>
-        <div className="mt-8 hidden w-1/2 flex-col justify-center space-y-2 sm:flex">
+        <div className="mt-8 hidden w-1/2 justify-center sm:flex sm:flex-row sm:space-x-4">
           <button onClick={search} type="submit" className="btn">
             Smart Analyze
           </button>
