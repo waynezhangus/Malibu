@@ -30,13 +30,13 @@ export default function Search({ tweet }: Props) {
   }, []);
 
   return (
-    <div className="w-full dark:bg-[#202124]">
+    <div className="w-full dark:bg-zinc-900">
       <Head>
         <title>Analyze Results</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="max-w-3xl px-2 sm:pl-40">
+      <main className="max-w-3xl sm:pl-40">
         <TweetComponent tweet={tweet} />
       </main>
     </div>

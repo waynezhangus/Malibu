@@ -8,7 +8,7 @@ interface Props {
 
 export default function TweetComponent({ tweet }: Props) {
   return (
-    <div className="border-x border-gray-200">
+    <div className="sm:border-x sm:border-gray-200 dark:sm:border-gray-600">
       <SectionComponent
         id={tweet._id + 'title'}
         author={tweet.publisher}

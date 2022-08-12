@@ -103,8 +103,8 @@ export default function Home() {
             className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
           />
           <XIcon
-            className="h-6 cursor-pointer text-gray-500 transition-transform
-            duration-100 hover:scale-125 dark:text-gray-50 sm:mr-3"
+            className="h-5 cursor-pointer text-gray-500 transition-transform duration-100
+            hover:scale-125 dark:text-gray-50 sm:mr-3 sm:h-6"
             onClick={() => setInput('')}
           />
         </div>

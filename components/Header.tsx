@@ -14,7 +14,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-10 flex flex-col items-center border-b bg-white dark:bg-[#202124]">
+    <header className="sticky top-0 z-10 flex flex-col items-center border-b bg-white dark:border-zinc-600 dark:bg-zinc-900">
       <div className="flex w-full items-center px-6 pt-2 sm:pt-7 sm:pb-7">
         <div className="hidden dark:block">
           <Image
@@ -38,7 +38,7 @@ export default function Header() {
         </div>
         <form
           className="mx-5 hidden w-full max-w-3xl items-center rounded-full 
-          border border-gray-200 px-5 py-2 shadow-md sm:flex"
+          border border-gray-200 px-5 py-2 shadow-md dark:border-transparent dark:bg-zinc-800 sm:flex"
           action="/s"
         >
           <input
@@ -50,8 +50,8 @@ export default function Header() {
             onChange={(e) => setInput(e.target.value)}
           />
           <XIcon
-            className="h-6 cursor-pointer text-gray-500 transition-transform
-            duration-100 hover:scale-125 dark:text-gray-50 sm:mr-3"
+            className="h-5 cursor-pointer text-gray-500 transition-transform duration-100
+            hover:scale-125 dark:text-gray-500 sm:mr-3 sm:h-6"
             onClick={() => setInput('')}
           />
           <SearchIcon
@@ -70,7 +70,7 @@ export default function Header() {
       <div className="w-full">
         <form
           className="my-2 mx-5 flex items-center rounded-full 
-            border border-gray-200 px-5 py-2 shadow-md sm:hidden"
+            border border-gray-200 px-5 py-2 shadow-md dark:border-transparent dark:bg-zinc-800 sm:hidden"
           action="/s"
         >
           <input
@@ -82,8 +82,8 @@ export default function Header() {
             onChange={(e) => setInput(e.target.value)}
           />
           <XIcon
-            className="h-6 cursor-pointer text-gray-500 transition-transform
-              duration-100 hover:scale-125 dark:text-gray-50 sm:mr-3"
+            className="h-5 cursor-pointer text-gray-500 transition-transform duration-100
+              hover:scale-125 dark:text-gray-50 sm:mr-3 sm:h-6"
             onClick={() => setInput('')}
           />
           <SearchIcon
