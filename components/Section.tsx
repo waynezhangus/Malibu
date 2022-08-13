@@ -104,12 +104,20 @@ export default function SectionComponent({
         </div>
 
         <p className="pt-1 text-sm leading-tight">{text}</p>
+        {points && points.length > 0 && !fold && (
+          <p
+            className="cursor-pointer pt-1 text-sm leading-tight text-twitter"
+            onClick={() => setFold(true)}
+          >
+            Hide this thread
+          </p>
+        )}
         {points && points.length > 0 && fold && (
           <p
             className="cursor-pointer pt-1 text-sm leading-tight text-twitter"
             onClick={() => setFold(false)}
           >
-            Show more points
+            Show this thread
           </p>
         )}
         {image && (

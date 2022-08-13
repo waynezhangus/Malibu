@@ -4,10 +4,12 @@ import { useRouter } from 'next/router';
 import { SearchIcon, XIcon } from '@heroicons/react/outline';
 import Avatar from '../components/Avatar';
 import Footer from '../components/Footer';
+import Feed from '../components/Feed';
 
 export default function Home() {
   const router = useRouter();
   const [input, setInput] = React.useState('');
+  const [showFeed, setShowFeed] = React.useState(true);
   const search = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!input.length) return;
@@ -35,7 +37,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
+    <div className="flex h-screen flex-col items-center justify-center overflow-hidden">
       <Head>
         <title>Malibu</title>
         <link rel="icon" href="/favicon.ico" />
@@ -119,6 +121,44 @@ export default function Home() {
           </button>
         </div>
       </form>
+
+      <div className="relative m-4 hidden md:block">
+        {showFeed && (
+          <div className="absolute z-10 h-48 w-full animate-[move_2s_forwards_ease-in-out] bg-white dark:hidden"></div>
+        )}
+
+        <div
+          className={`flex space-x-2 ${
+            showFeed
+              ? 'dark:animate-[fadeIn_2s_forwards_ease-in-out]'
+              : 'invisible'
+          }`}
+        >
+          <Feed />
+          <Feed />
+          <Feed />
+          <Feed />
+          <Feed />
+        </div>
+
+        <label
+          htmlFor="showFeed"
+          className="relative mt-4 inline-flex cursor-pointer items-center"
+        >
+          <input
+            type="checkbox"
+            id="showFeed"
+            className="peer sr-only"
+            checked={showFeed}
+            onChange={() => setShowFeed(!showFeed)}
+          />
+          <div className="switch-bg"></div>
+          <div className="switch-thumb"></div>
+          <span className="ml-3 text-xs font-medium text-gray-500 dark:text-gray-300">
+            {showFeed ? 'Hide feed' : 'Show feed'}
+          </span>
+        </label>
+      </div>
       <Footer />
     </div>
   );

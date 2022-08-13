@@ -13,6 +13,14 @@
   }
 }
 
+.switch-bg {
+  @apply h-[14px] w-10 rounded-full bg-gray-300 opacity-50 peer-checked:bg-sky-400;
+}
+
+.switch-thumb {
+  @apply absolute h-5 w-5 rounded-full bg-gray-100 shadow-md shadow-gray-300 transition peer-checked:translate-x-full peer-checked:bg-sky-400 dark:shadow-gray-800;
+}
+
 input[type='search']::-webkit-search-decoration,
 input[type='search']::-webkit-search-cancel-button,
 input[type='search']::-webkit-search-results-button,
