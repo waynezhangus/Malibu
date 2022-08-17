@@ -5,8 +5,13 @@ import { SearchIcon, XIcon } from '@heroicons/react/outline';
 import Avatar from '../components/Avatar';
 import Footer from '../components/Footer';
 import Feed from '../components/Feed';
+import { Tweet } from '../typings';
 
-export default function Home() {
+interface Props {
+  tweets: Tweet[];
+}
+
+export default function Home({ tweets }: Props) {
   const router = useRouter();
   const [input, setInput] = React.useState('');
   const [showFeed, setShowFeed] = React.useState(true);
@@ -134,11 +139,9 @@ export default function Home() {
               : 'invisible'
           }`}
         >
-          <Feed />
-          <Feed />
-          <Feed />
-          <Feed />
-          <Feed />
+          {tweets.map((tweet, index) => (
+            <Feed key={tweet._id} tweet={tweet} />
+          ))}
         </div>
 
         <label
@@ -162,4 +165,19 @@ export default function Home() {
       <Footer />
     </div>
   );
+}
+
+export async function getServerSideProps(context: any) {
+  const res = await fetch('https://malibu-server1.herokuapp.com/tweets');
+  let data;
+  if (res.ok) {
+    data = await res.json();
+  } else {
+    // console.log(res.status, res.statusText);
+  }
+  return {
+    props: {
+      tweets: data,
+    },
+  };
 }

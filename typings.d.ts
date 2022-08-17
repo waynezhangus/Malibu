@@ -16,6 +16,7 @@ interface Section {
 
 export interface Tweet {
   _id: string;
+  URL: string;
   title: string;
   subtitle?: string;
   time: string;
