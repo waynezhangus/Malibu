@@ -177,27 +177,27 @@ export default function Home({ tweets }: Props) {
           />
           <div className="switch-bg"></div>
           <div className="switch-thumb"></div>
-          <span className="ml-3 text-xs font-medium text-gray-500 dark:text-gray-300">
+          <span className="ml-3 text-sm font-medium text-gray-500 dark:text-gray-300">
             {showFeed ? 'Hide feed' : 'Show feed'}
           </span>
         </label>
 
         <ul
-          className={`flex-col space-y-2 text-sm text-gray-500 dark:text-gray-300 ${
-            showFeed ? 'flex' : 'hidden'
+          className={`text-base text-gray-500 dark:text-gray-300 ${
+            showFeed ? 'block' : 'hidden'
           }`}
         >
           {tweets.map((tweet, index) => (
             <li
               key={index}
-              className="flex items-center border-b py-2 dark:border-gray-400"
+              className="flex items-center border-b py-3 dark:border-gray-400"
               onClick={() =>
                 router.push(
                   `/search?q=${'https://www.popsci.com/science/omicron-coronavirus-variant'}`
                 )
               }
             >
-              <TrendingUpIcon className="mr-3 h-4 flex-none text-gray-500 dark:text-gray-50" />
+              <TrendingUpIcon className="mr-3 h-5 flex-none text-gray-500 dark:text-gray-50" />
               {tweet.title}
             </li>
           ))}
