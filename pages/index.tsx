@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { SearchIcon, XIcon } from '@heroicons/react/outline';
+import { SearchIcon, XIcon, TrendingUpIcon } from '@heroicons/react/outline';
 import Avatar from '../components/Avatar';
 import Footer from '../components/Footer';
 import Feed from '../components/Feed';
@@ -78,19 +78,19 @@ export default function Home({ tweets }: Props) {
         </div>
       </header>
       <form
-        className="mt-10 flex w-[90%] flex-grow flex-col items-center sm:mt-20"
+        className="mt-10 flex w-[90%] flex-col items-center md:mt-20 md:flex-grow"
         action="/s"
       >
         <div className="hidden dark:block">
           <img
-            className="h-16 sm:h-24"
+            className="h-16 md:h-24"
             src="/images/logowhite.png" // Route of the image file
             alt="Malibu Logo"
           />
         </div>
         <div className="dark:hidden">
           <img
-            className="h-16 sm:h-24"
+            className="h-16 md:h-24"
             src="/images/logotrans.png" // Route of the image file
             alt="Malibu Logo"
           />
@@ -98,7 +98,7 @@ export default function Home({ tweets }: Props) {
         <div
           className="mt-5 flex w-full max-w-md items-center space-x-3 rounded-full 
         border border-gray-200 px-5 py-2 focus-within:shadow-lg hover:shadow-md 
-        sm:max-w-xl lg:max-w-2xl"
+        md:max-w-xl lg:max-w-2xl"
         >
           <SearchIcon className="h-5 text-gray-500 dark:text-gray-50" />
           <input
@@ -111,11 +111,11 @@ export default function Home({ tweets }: Props) {
           />
           <XIcon
             className="h-5 cursor-pointer text-gray-500 transition-transform duration-100
-            hover:scale-125 dark:text-gray-50 sm:mr-3 sm:h-6"
+            hover:scale-125 dark:text-gray-50 md:mr-3 md:h-6"
             onClick={() => setInput('')}
           />
         </div>
-        <div className="mt-8 hidden w-1/2 justify-center sm:flex sm:flex-row sm:space-x-4">
+        <div className="mt-8 hidden w-1/2 justify-center md:flex md:flex-row md:space-x-4">
           <button onClick={search} type="submit" className="btn">
             Smart Analyze
           </button>
@@ -162,6 +162,48 @@ export default function Home({ tweets }: Props) {
           </span>
         </label>
       </div>
+
+      <div className="relative mt-4 w-[80%] flex-grow md:hidden">
+        <label
+          htmlFor="showFeed"
+          className="relative my-6 inline-flex cursor-pointer items-center"
+        >
+          <input
+            type="checkbox"
+            id="showFeed"
+            className="peer sr-only"
+            checked={showFeed}
+            onChange={() => setShowFeed(!showFeed)}
+          />
+          <div className="switch-bg"></div>
+          <div className="switch-thumb"></div>
+          <span className="ml-3 text-xs font-medium text-gray-500 dark:text-gray-300">
+            {showFeed ? 'Hide feed' : 'Show feed'}
+          </span>
+        </label>
+
+        <ul
+          className={`flex-col space-y-2 text-sm text-gray-500 dark:text-gray-300 ${
+            showFeed ? 'flex' : 'hidden'
+          }`}
+        >
+          {tweets.map((tweet, index) => (
+            <li
+              key={index}
+              className="flex items-center border-b py-2 dark:border-gray-400"
+              onClick={() =>
+                router.push(
+                  `/search?q=${'https://www.popsci.com/science/omicron-coronavirus-variant'}`
+                )
+              }
+            >
+              <TrendingUpIcon className="mr-3 h-4 flex-none text-gray-500 dark:text-gray-50" />
+              {tweet.title}
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <Footer />
     </div>
   );
