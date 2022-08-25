@@ -4,12 +4,13 @@ import SubSection from './SubSection';
 import TimeAgo from 'react-timeago';
 import { useRouter } from 'next/router';
 import {
-  ChatIcon,
+  ChatBubbleOvalLeftIcon,
   HeartIcon,
-  SwitchHorizontalIcon,
-  UploadIcon,
-} from '@heroicons/react/outline';
-import { LibraryIcon, BadgeCheckIcon } from '@heroicons/react/solid';
+  ArrowUturnLeftIcon,
+  ArrowsRightLeftIcon,
+} from '@heroicons/react/24/outline';
+import { BuildingLibraryIcon, CheckBadgeIcon } from '@heroicons/react/24/solid';
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid';
 
 interface Props {
   id: string;
@@ -18,6 +19,7 @@ interface Props {
   points?: Point[];
   time?: string;
   image?: string;
+  URL?: string;
   end?: boolean;
   publisher?: boolean;
   verified?: boolean;
@@ -29,6 +31,7 @@ export default function SectionComponent({
   text,
   time,
   image,
+  URL,
   points,
   end = false,
   publisher = false,
@@ -77,8 +80,8 @@ export default function SectionComponent({
 
       <div className="flex-1 dark:text-gray-50">
         <div className="flex items-center space-x-1">
-          {publisher && <LibraryIcon className="h-4 text-twitter" />}
-          {verified && <BadgeCheckIcon className="h-4 text-twitter" />}
+          {publisher && <BuildingLibraryIcon className="h-4 text-twitter" />}
+          {verified && <CheckBadgeIcon className="h-4 text-twitter" />}
           <a
             className="mr-1 text-sm font-bold hover:text-twitter"
             href={`https://twitter.com/${author.screenName}`}
@@ -121,11 +124,22 @@ export default function SectionComponent({
           </p>
         )}
         {image && (
-          <img
-            className="m-3 ml-0 mb-1 max-h-60 rounded-lg object-cover shadow-sm"
-            src={image}
-            alt=""
-          />
+          <div className="group relative m-3 ml-0 mb-1 h-60 text-center">
+            <img
+              className="h-full w-full rounded-lg object-cover shadow-sm group-hover:opacity-40"
+              src={image}
+              alt=""
+            />
+            <a
+              className="invisible absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm group-hover:visible"
+              href={URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <ArrowTopRightOnSquareIcon className="mr-2 inline-block h-4" />
+              Original Website
+            </a>
+          </div>
         )}
 
         {points &&
@@ -146,17 +160,17 @@ export default function SectionComponent({
 
         <div className="mt-3 flex justify-between">
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400">
-            <ChatIcon className="h-5 w-5" />
+            <ChatBubbleOvalLeftIcon className="h-5 w-5" />
             <p className="pt-0.5 text-sm">5</p>
           </div>
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400">
-            <SwitchHorizontalIcon className="h-5 w-5" />
+            <ArrowsRightLeftIcon className="h-5 w-5" />
           </div>
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400">
             <HeartIcon className="h-5 w-5" />
           </div>
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400">
-            <UploadIcon className="h-5 w-5" />
+            <ArrowUturnLeftIcon className="h-5 w-5" />
           </div>
         </div>
       </div>

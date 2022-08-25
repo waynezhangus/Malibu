@@ -15,6 +15,7 @@ export default function TweetComponent({ tweet }: Props) {
         text={tweet.title}
         time={tweet.time}
         image={tweet.image}
+        URL={tweet.URL}
         publisher
       />
       <SectionComponent

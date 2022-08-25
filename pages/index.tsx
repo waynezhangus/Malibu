@@ -1,7 +1,11 @@
 import * as React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { SearchIcon, XIcon, TrendingUpIcon } from '@heroicons/react/outline';
+import {
+  MagnifyingGlassIcon,
+  XMarkIcon,
+  ArrowTrendingUpIcon,
+} from '@heroicons/react/24/outline';
 import Avatar from '../components/Avatar';
 import Footer from '../components/Footer';
 import Feed from '../components/Feed';
@@ -59,7 +63,9 @@ export default function Home({ tweets }: Props) {
       <header className="flex w-full justify-between p-5 pl-8 text-sm text-gray-700 dark:text-gray-50">
         <div className="flex items-center space-x-4">
           <a className="link">About</a>
-          <a className="link">Settings</a>
+          <a className="link" onClick={() => router.push('settings')}>
+            Settings
+          </a>
         </div>
         <div className="flex items-center space-x-4">
           <a
@@ -72,7 +78,7 @@ export default function Home({ tweets }: Props) {
           </a>
           <Avatar
             url={
-              'https://yt3.ggpht.com/m8od2OcBuHTpgbmzGf1w0JXfb3e3hPJVTkaw8zyV86zO-ULTDQeiJMej8hx396BERzqfgRaMAQ=s88-c-k-c0x00ffffff-no-rj-mo'
+              'http://pbs.twimg.com/profile_images/1540186755101405189/Jo_ylk3K_normal.jpg'
             }
           />
         </div>
@@ -100,7 +106,7 @@ export default function Home({ tweets }: Props) {
         border border-gray-200 px-5 py-2 focus-within:shadow-lg hover:shadow-md 
         md:max-w-xl lg:max-w-2xl"
         >
-          <SearchIcon className="h-5 text-gray-500 dark:text-gray-50" />
+          <MagnifyingGlassIcon className="h-5 text-gray-500 dark:text-gray-50" />
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -109,7 +115,7 @@ export default function Home({ tweets }: Props) {
             type="search"
             className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
           />
-          <XIcon
+          <XMarkIcon
             className="h-5 cursor-pointer text-gray-500 transition-transform duration-100
             hover:scale-125 dark:text-gray-50 md:mr-3 md:h-6"
             onClick={() => setInput('')}
@@ -197,7 +203,7 @@ export default function Home({ tweets }: Props) {
                 )
               }
             >
-              <TrendingUpIcon className="mr-3 h-5 flex-none text-gray-500 dark:text-gray-50" />
+              <ArrowTrendingUpIcon className="mr-3 h-5 flex-none text-gray-500 dark:text-gray-50" />
               {tweet.title}
             </li>
           ))}

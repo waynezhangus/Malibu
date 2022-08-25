@@ -1,4 +1,4 @@
-import { SearchIcon, XIcon } from '@heroicons/react/outline';
+import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -49,12 +49,12 @@ export default function Header() {
             className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
             onChange={(e) => setInput(e.target.value)}
           />
-          <XIcon
+          <XMarkIcon
             className="h-5 cursor-pointer text-gray-500 transition-transform duration-100
             hover:scale-125 dark:text-gray-500 sm:mr-3 sm:h-6"
             onClick={() => setInput('')}
           />
-          <SearchIcon
+          <MagnifyingGlassIcon
             className="hidden h-5 border-l border-gray-300 
             pl-4 text-blue-500 sm:inline-flex"
           />
@@ -81,12 +81,12 @@ export default function Header() {
             className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
             onChange={(e) => setInput(e.target.value)}
           />
-          <XIcon
+          <XMarkIcon
             className="h-5 cursor-pointer text-gray-500 transition-transform duration-100
               hover:scale-125 dark:text-gray-50 sm:mr-3 sm:h-6"
             onClick={() => setInput('')}
           />
-          <SearchIcon
+          <MagnifyingGlassIcon
             className="hidden h-5 border-l border-gray-300 
               pl-4 text-blue-500 sm:inline-flex"
           />
