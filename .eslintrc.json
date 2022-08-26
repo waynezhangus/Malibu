@@ -23,7 +23,7 @@
     "react/react-in-jsx-scope": "off",
     "spaced-comment": ["error", "always", { "markers": ["/"] }],
     "react/prop-types": 0,
-    "no-console": 1,
+    "no-console": 0,
     "no-unused-vars": 0,
     "no-undef": 0,
     "@next/next/no-img-element": 0

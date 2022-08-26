@@ -196,12 +196,8 @@ export default function Home({ tweets }: Props) {
           {tweets.map((tweet, index) => (
             <li
               key={index}
-              className="flex items-center border-b py-3 dark:border-gray-400"
-              onClick={() =>
-                router.push(
-                  `/search?q=${'https://www.popsci.com/science/omicron-coronavirus-variant'}`
-                )
-              }
+              className="flex cursor-pointer items-center border-b py-3 dark:border-gray-400"
+              onClick={() => router.push(`/search?q=${tweet.URL}`)}
             >
               <ArrowTrendingUpIcon className="mr-3 h-5 flex-none text-gray-500 dark:text-gray-50" />
               {tweet.title}
