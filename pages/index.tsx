@@ -11,14 +11,11 @@ import Footer from '../components/Footer';
 import Feed from '../components/Feed';
 import { Tweet } from '../typings';
 
-interface Props {
-  tweets: Tweet[];
-}
-
-export default function Home({ tweets }: Props) {
+export default function Home() {
   const router = useRouter();
   const [input, setInput] = React.useState('');
   const [showFeed, setShowFeed] = React.useState(true);
+  const [tweets, setTweets] = React.useState<Tweet[] | null>(null);
   const search = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!input.length) return;
@@ -43,6 +40,20 @@ export default function Home({ tweets }: Props) {
         if (event.matches) document.documentElement.classList.add('dark');
         else document.documentElement.classList.remove('dark');
       });
+  }, []);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch('https://malibu-server1.herokuapp.com/tweets');
+      let data;
+      if (res.ok) {
+        data = await res.json();
+        setTweets(data);
+      } else {
+        console.log(res.status, res.statusText);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
@@ -138,17 +149,19 @@ export default function Home({ tweets }: Props) {
           <div className="absolute z-10 h-48 w-full animate-[move_2s_forwards_ease-in-out] bg-white dark:hidden"></div>
         )}
 
-        <div
-          className={`flex space-x-2 ${
-            showFeed
-              ? 'dark:animate-[fadeIn_2s_forwards_ease-in-out]'
-              : 'invisible'
-          }`}
-        >
-          {tweets.map((tweet, index) => (
-            <Feed key={tweet._id} tweet={tweet} />
-          ))}
-        </div>
+        {tweets && (
+          <div
+            className={`flex space-x-2 ${
+              showFeed
+                ? 'dark:animate-[fadeIn_2s_forwards_ease-in-out]'
+                : 'invisible'
+            }`}
+          >
+            {tweets.map((tweet, index) => (
+              <Feed key={tweet._id} tweet={tweet} />
+            ))}
+          </div>
+        )}
 
         <label
           htmlFor="showFeed"
@@ -188,40 +201,27 @@ export default function Home({ tweets }: Props) {
           </span>
         </label>
 
-        <ul
-          className={`text-base text-gray-500 dark:text-gray-300 ${
-            showFeed ? 'block' : 'hidden'
-          }`}
-        >
-          {tweets.map((tweet, index) => (
-            <li
-              key={index}
-              className="flex cursor-pointer items-center border-b py-3 dark:border-gray-400"
-              onClick={() => router.push(`/search?q=${tweet.URL}`)}
-            >
-              <ArrowTrendingUpIcon className="mr-3 h-5 flex-none text-gray-500 dark:text-gray-50" />
-              {tweet.title}
-            </li>
-          ))}
-        </ul>
+        {tweets && (
+          <ul
+            className={`text-base text-gray-500 dark:text-gray-300 ${
+              showFeed ? 'block' : 'hidden'
+            }`}
+          >
+            {tweets.map((tweet, index) => (
+              <li
+                key={index}
+                className="flex cursor-pointer items-center border-b py-3 dark:border-gray-400"
+                onClick={() => router.push(`/search?q=${tweet.URL}`)}
+              >
+                <ArrowTrendingUpIcon className="mr-3 h-5 flex-none text-gray-500 dark:text-gray-50" />
+                {tweet.title}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       <Footer />
     </div>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const res = await fetch('https://malibu-server1.herokuapp.com/tweets');
-  let data;
-  if (res.ok) {
-    data = await res.json();
-  } else {
-    // console.log(res.status, res.statusText);
-  }
-  return {
-    props: {
-      tweets: data,
-    },
-  };
 }

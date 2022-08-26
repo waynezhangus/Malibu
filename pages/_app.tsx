@@ -46,7 +46,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             </svg>
             <span className="sr-only">Loading...</span>
             <p className="mt-5 text-lg tracking-wide dark:text-gray-50">
-              Please wait while we process the article.
+              Please wait while we process your request.
             </p>
           </div>
         </div>

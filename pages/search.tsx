@@ -35,7 +35,7 @@ export default function Search({ tweet }: Props) {
         <title>Analyze Results</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
+      <Header showTitle="search" />
       <main className="max-w-3xl sm:pl-40">
         <TweetComponent tweet={tweet} />
       </main>

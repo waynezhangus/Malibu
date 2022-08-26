@@ -1,24 +1,40 @@
 import * as React from 'react';
 import Head from 'next/head';
+import Header from '../components/Header';
 
-export default function Settings() {
+interface Settings {
+  theme: boolean; // light false, dark true
+  autoExtend: boolean;
+  autoShowFeed: boolean;
+  tweetNum: number;
+}
+
+const initSettings: Settings = {
+  theme: true,
+  autoExtend: false,
+  autoShowFeed: true,
+  tweetNum: 5,
+};
+
+export default function SettingsComponent() {
+  const [settings, setSettings] = React.useState(initSettings);
   React.useEffect(() => {
-    const settingJson = localStorage.getItem('settings');
-    const settings = settingJson ? JSON.parse(settingJson) : {};
+    const localSettingJson = localStorage.getItem('settings');
+    const localSettings = localSettingJson ? JSON.parse(localSettingJson) : {};
     if (
-      settings?.theme === 'dark' ||
-      (!settings?.theme &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
+      localSettings?.theme === 'light' ||
+      (!localSettings?.theme &&
+        window.matchMedia('(prefers-color-scheme: light)').matches)
     ) {
-      document.documentElement.classList.add('dark');
-    } else {
       document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
     }
     window
-      .matchMedia('(prefers-color-scheme: dark)')
+      .matchMedia('(prefers-color-scheme: light)')
       .addEventListener('change', (event) => {
-        if (event.matches) document.documentElement.classList.add('dark');
-        else document.documentElement.classList.remove('dark');
+        if (event.matches) document.documentElement.classList.remove('dark');
+        else document.documentElement.classList.add('dark');
       });
   }, []);
 
@@ -28,20 +44,81 @@ export default function Settings() {
         <title>Settings</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="hidden dark:block">
-        <img
-          className="h-16 md:h-24"
-          src="/images/logowhite.png" // Route of the image file
-          alt="Malibu Logo"
-        />
-      </div>
-      <div className="dark:hidden">
-        <img
-          className="h-16 md:h-24"
-          src="/images/logotrans.png" // Route of the image file
-          alt="Malibu Logo"
-        />
-      </div>
+      <Header showTitle="settings" />
+      <main className="max-w-3xl dark:text-gray-50 sm:mx-auto sm:border-x sm:border-gray-200 dark:sm:border-gray-600">
+        <div
+          className={`flex flex-col space-y-5 border-b border-gray-200 p-6 dark:border-zinc-600`}
+        >
+          <div className="mb-1">Display Settings</div>
+          <label className="relative inline-flex cursor-pointer items-center">
+            <input
+              type="checkbox"
+              className="peer sr-only"
+              name="theme"
+              checked={settings.theme}
+              onChange={(e) =>
+                setSettings({ ...settings, [e.target.name]: e.target.checked })
+              }
+            />
+            <div className="switch-bg"></div>
+            <div className="switch-thumb"></div>
+            <span className="ml-3 text-sm font-medium">Dark theme</span>
+          </label>
+          <label className="relative inline-flex cursor-pointer items-center">
+            <input
+              type="checkbox"
+              className="peer sr-only"
+              name="autoExtend"
+              checked={settings.autoExtend}
+              onChange={(e) =>
+                setSettings({ ...settings, [e.target.name]: e.target.checked })
+              }
+            />
+            <div className="switch-bg"></div>
+            <div className="switch-thumb"></div>
+            <span className="ml-3 text-sm font-medium">
+              Extend the threads by default
+            </span>
+          </label>
+          <label className="relative inline-flex cursor-pointer items-center">
+            <input
+              type="checkbox"
+              className="peer sr-only"
+              name="autoShowFeed"
+              checked={settings.autoShowFeed}
+              onChange={(e) =>
+                setSettings({ ...settings, [e.target.name]: e.target.checked })
+              }
+            />
+            <div className="switch-bg"></div>
+            <div className="switch-thumb"></div>
+            <span className="ml-3 text-sm font-medium">
+              Show feeds on the search page by default
+            </span>
+          </label>
+        </div>
+        <div
+          className={`flex flex-col space-y-5 border-b border-gray-200 p-6 dark:border-zinc-600`}
+        >
+          <div className="mb-1">Parser Settings</div>
+          <label className="relative inline-flex cursor-pointer items-center">
+            <input
+              className="text-sm focus:outline-none dark:bg-zinc-800"
+              type="number"
+              min="2"
+              max="10"
+              name="tweetNum"
+              value={settings.tweetNum}
+              onChange={(e) =>
+                setSettings({ ...settings, [e.target.name]: e.target.value })
+              }
+            />
+            <span className="ml-3 text-sm font-medium">
+              Number of tweets generated by the parser
+            </span>
+          </label>
+        </div>
+      </main>
     </div>
   );
 }
