@@ -126,7 +126,7 @@ export default function SectionComponent({
         {image && (
           <div className="group relative m-3 ml-0 mb-1 h-60 text-center">
             <img
-              className="h-full w-full rounded-lg object-cover shadow-sm group-hover:opacity-40"
+              className="h-full w-full rounded-lg object-cover shadow-sm group-hover:opacity-40 group-hover:transition group-hover:duration-300"
               src={image}
               alt=""
             />

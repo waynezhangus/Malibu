@@ -6,7 +6,27 @@ interface Props {
   tweet: Tweet;
 }
 
-export default function TweetComponent({ tweet }: Props) {
+export default function TweetComponent({ tweet: oldTweet }: Props) {
+  const [tweet, setTweet] = React.useState(oldTweet);
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(
+        'https://malibu-server1.herokuapp.com/tweetUpdate/?' +
+          new URLSearchParams({ url: tweet.URL })
+      );
+      let data;
+      if (res.ok) {
+        data = await res.json();
+        setTweet(data);
+        console.log('DB refreshed');
+      } else {
+        console.log(res.status, res.statusText);
+      }
+    };
+    if ((Date.now() - Date.parse(tweet.updatedAt)) / 1000 > 12 * 3600) {
+      fetchData();
+    }
+  }, []);
   return (
     <div className="sm:border-x sm:border-gray-200 dark:sm:border-gray-600">
       <SectionComponent
