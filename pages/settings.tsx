@@ -11,7 +11,9 @@ export default function SettingsComponent() {
     tweetNum: 5,
   };
   const [user, setUser] = React.useState(
-    localStorage.getItem('user')
+    typeof window == 'undefined'
+      ? initUser
+      : localStorage.getItem('user')
       ? JSON.parse(localStorage.getItem('user') as string)
       : initUser
   );
