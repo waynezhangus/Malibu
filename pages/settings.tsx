@@ -10,16 +10,13 @@ export default function SettingsComponent() {
     autoShowFeed: true,
     tweetNum: 5,
   };
-  const [user, setUser] = React.useState(
-    typeof window == 'undefined'
-      ? initUser
-      : localStorage.getItem('user')
-      ? JSON.parse(localStorage.getItem('user') as string)
-      : initUser
-  );
+  const [user, setUser] = React.useState(initUser);
   const onMount = React.useRef(true);
 
   React.useEffect(() => {
+    const userJson = localStorage.getItem('user');
+    const localUser = userJson ? JSON.parse(userJson) : null;
+    if (localUser) setUser(localUser);
     window
       .matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', (event) => {

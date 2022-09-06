@@ -39,6 +39,12 @@ export default function SectionComponent({
 }: Props) {
   const [fold, setFold] = React.useState<boolean>(false);
 
+  React.useEffect(() => {
+    const userJson = localStorage.getItem('user');
+    const localUser = userJson ? JSON.parse(userJson) : {};
+    if (localUser) setFold(!localUser.autoExtend);
+  }, []);
+
   return (
     <div
       className={`flex space-x-3 py-3 px-4 hover:bg-gray-100 dark:hover:bg-zinc-900 ${

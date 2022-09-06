@@ -25,6 +25,7 @@ export default function Home() {
   React.useEffect(() => {
     const userJson = localStorage.getItem('user');
     const localUser = userJson ? JSON.parse(userJson) : {};
+    if (localUser) setShowFeed(localUser.autoShowFeed);
     if (
       localUser?.theme === false ||
       (!localUser && window.matchMedia('(prefers-color-scheme: light)').matches)
