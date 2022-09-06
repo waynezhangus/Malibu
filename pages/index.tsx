@@ -26,18 +26,18 @@ export default function Home() {
     const userJson = localStorage.getItem('user');
     const localUser = userJson ? JSON.parse(userJson) : {};
     if (
-      localUser?.theme === true ||
-      (!localUser && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      localUser?.theme === false ||
+      (!localUser && window.matchMedia('(prefers-color-scheme: light)').matches)
     ) {
-      document.documentElement.classList.add('dark');
-    } else {
       document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
     }
     window
-      .matchMedia('(prefers-color-scheme: dark)')
+      .matchMedia('(prefers-color-scheme: light)')
       .addEventListener('change', (event) => {
-        if (event.matches) document.documentElement.classList.add('dark');
-        else document.documentElement.classList.remove('dark');
+        if (event.matches) document.documentElement.classList.remove('dark');
+        else document.documentElement.classList.add('dark');
       });
   }, []);
 
