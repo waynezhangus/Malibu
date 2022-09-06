@@ -1,3 +1,10 @@
+interface User {
+  theme: boolean; // light false, dark true
+  autoExtend: boolean;
+  autoShowFeed: boolean;
+  tweetNum: number;
+}
+
 interface Entity {
   userName: string;
   screenName?: string;

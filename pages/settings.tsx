@@ -1,42 +1,46 @@
 import * as React from 'react';
 import Head from 'next/head';
 import Header from '../components/Header';
-
-interface Settings {
-  theme: boolean; // light false, dark true
-  autoExtend: boolean;
-  autoShowFeed: boolean;
-  tweetNum: number;
-}
-
-const initSettings: Settings = {
-  theme: true,
-  autoExtend: false,
-  autoShowFeed: true,
-  tweetNum: 5,
-};
+import { User } from '../typings';
 
 export default function SettingsComponent() {
-  const [settings, setSettings] = React.useState(initSettings);
+  const initUser: User = {
+    theme: true,
+    autoExtend: false,
+    autoShowFeed: true,
+    tweetNum: 5,
+  };
+  const [user, setUser] = React.useState(
+    localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user') as string)
+      : initUser
+  );
+  const onMount = React.useRef(true);
+
   React.useEffect(() => {
-    const localSettingJson = localStorage.getItem('settings');
-    const localSettings = localSettingJson ? JSON.parse(localSettingJson) : {};
-    if (
-      localSettings?.theme === 'light' ||
-      (!localSettings?.theme &&
-        window.matchMedia('(prefers-color-scheme: light)').matches)
-    ) {
-      document.documentElement.classList.remove('dark');
-    } else {
-      document.documentElement.classList.add('dark');
-    }
     window
-      .matchMedia('(prefers-color-scheme: light)')
+      .matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', (event) => {
-        if (event.matches) document.documentElement.classList.remove('dark');
-        else document.documentElement.classList.add('dark');
+        if (event.matches) document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
       });
   }, []);
+
+  React.useEffect(() => {
+    if (
+      user?.theme === true ||
+      (!user && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [user.theme]);
+
+  React.useEffect(() => {
+    if (!onMount.current) localStorage.setItem('user', JSON.stringify(user));
+    else onMount.current = false;
+  }, [user]);
 
   return (
     <div className="h-screen w-full dark:bg-zinc-900">
@@ -55,9 +59,9 @@ export default function SettingsComponent() {
               type="checkbox"
               className="peer sr-only"
               name="theme"
-              checked={settings.theme}
+              checked={user.theme}
               onChange={(e) =>
-                setSettings({ ...settings, [e.target.name]: e.target.checked })
+                setUser({ ...user, [e.target.name]: e.target.checked })
               }
             />
             <div className="switch-bg"></div>
@@ -69,9 +73,9 @@ export default function SettingsComponent() {
               type="checkbox"
               className="peer sr-only"
               name="autoExtend"
-              checked={settings.autoExtend}
+              checked={user.autoExtend}
               onChange={(e) =>
-                setSettings({ ...settings, [e.target.name]: e.target.checked })
+                setUser({ ...user, [e.target.name]: e.target.checked })
               }
             />
             <div className="switch-bg"></div>
@@ -85,9 +89,9 @@ export default function SettingsComponent() {
               type="checkbox"
               className="peer sr-only"
               name="autoShowFeed"
-              checked={settings.autoShowFeed}
+              checked={user.autoShowFeed}
               onChange={(e) =>
-                setSettings({ ...settings, [e.target.name]: e.target.checked })
+                setUser({ ...user, [e.target.name]: e.target.checked })
               }
             />
             <div className="switch-bg"></div>
@@ -108,9 +112,9 @@ export default function SettingsComponent() {
               min="2"
               max="10"
               name="tweetNum"
-              value={settings.tweetNum}
+              value={user.tweetNum}
               onChange={(e) =>
-                setSettings({ ...settings, [e.target.name]: e.target.value })
+                setUser({ ...user, [e.target.name]: e.target.value })
               }
             />
             <span className="ml-3 text-sm font-medium">

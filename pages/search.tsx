@@ -10,12 +10,11 @@ interface Props {
 
 export default function Search({ tweet }: Props) {
   React.useEffect(() => {
-    const settingJson = localStorage.getItem('settings');
-    const settings = settingJson ? JSON.parse(settingJson) : {};
+    const userJson = localStorage.getItem('user');
+    const localUser = userJson ? JSON.parse(userJson) : {};
     if (
-      settings?.theme === 'dark' ||
-      (!settings?.theme &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
+      localUser?.theme === true ||
+      (!localUser && window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
       document.documentElement.classList.add('dark');
     } else {
