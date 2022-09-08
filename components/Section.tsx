@@ -47,7 +47,7 @@ export default function SectionComponent({
 
   return (
     <div
-      className={`flex space-x-3 py-3 px-4 hover:bg-gray-100 dark:hover:bg-zinc-900 ${
+      className={`flex space-x-3 py-3 px-4 hover:bg-gray-100 dark:hover:bg-zinc-800 ${
         end && 'border-b border-gray-200 dark:border-zinc-600'
       }`}
       id={id}

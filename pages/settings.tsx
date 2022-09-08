@@ -42,13 +42,13 @@ export default function SettingsComponent() {
   }, [user]);
 
   return (
-    <div className="h-screen w-full dark:bg-zinc-900">
+    <div className="h-screen w-full overflow-hidden dark:bg-zinc-900">
       <Head>
         <title>Settings</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header showTitle="settings" />
-      <main className="max-w-3xl dark:text-gray-50 sm:mx-auto sm:border-x sm:border-gray-200 dark:sm:border-gray-600">
+      <main className="h-full max-w-3xl dark:text-gray-50 sm:mx-auto sm:border-x sm:border-gray-200 dark:sm:border-gray-600">
         <div
           className={`flex flex-col space-y-5 border-b border-gray-200 p-6 dark:border-zinc-600`}
         >
@@ -100,9 +100,7 @@ export default function SettingsComponent() {
             </span>
           </label>
         </div>
-        <div
-          className={`flex flex-col space-y-5 border-b border-gray-200 p-6 dark:border-zinc-600`}
-        >
+        <div className={`flex flex-col space-y-5 p-6`}>
           <div className="mb-1">Parser Settings</div>
           <label className="relative inline-flex cursor-pointer items-center">
             <input

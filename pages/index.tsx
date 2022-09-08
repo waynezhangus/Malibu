@@ -165,7 +165,9 @@ export default function Home() {
 
         <label
           htmlFor="showFeed"
-          className="relative mt-4 inline-flex cursor-pointer items-center"
+          className={`relative mt-4 inline-flex cursor-pointer items-center ${
+            !tweets && 'invisible'
+          }`}
         >
           <input
             type="checkbox"
