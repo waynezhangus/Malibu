@@ -9,23 +9,36 @@ import {
 import Avatar from '../components/Avatar';
 import Footer from '../components/Footer';
 import Feed from '../components/Feed';
-import { Tweet } from '../typings';
+import { Tweet, User } from '../typings';
 
 export default function Home() {
+  const initUser: User = {
+    theme: true,
+    autoExtend: false,
+    autoShowFeed: true,
+    tweetNum: 5,
+  };
+
   const router = useRouter();
   const [input, setInput] = React.useState('');
-  const [showFeed, setShowFeed] = React.useState(true);
+  const [user, setUser] = React.useState(initUser);
+  const [showFeed, setShowFeed] = React.useState(false);
   const [tweets, setTweets] = React.useState<Tweet[] | null>(null);
   const search = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!input.length) return;
-    router.push(`/search?q=${input}`);
+    router.push(`/search?q=${input}&num=${user.tweetNum}`);
   };
 
   React.useEffect(() => {
     const userJson = localStorage.getItem('user');
-    const localUser = userJson ? JSON.parse(userJson) : {};
-    if (localUser) setShowFeed(localUser.autoShowFeed);
+    const localUser = userJson ? JSON.parse(userJson) : null;
+    if (localUser) {
+      setShowFeed(localUser.autoShowFeed);
+      setUser(localUser);
+    } else {
+      localStorage.setItem('user', JSON.stringify(user));
+    }
     if (
       localUser?.theme === false ||
       (!localUser && window.matchMedia('(prefers-color-scheme: light)').matches)
@@ -158,7 +171,7 @@ export default function Home() {
             }`}
           >
             {tweets.map((tweet, index) => (
-              <Feed key={tweet._id} tweet={tweet} />
+              <Feed key={tweet._id} tweet={tweet} tweetNum={user.tweetNum} />
             ))}
           </div>
         )}
@@ -213,7 +226,11 @@ export default function Home() {
               <li
                 key={index}
                 className="flex cursor-pointer items-center border-b py-3 dark:border-gray-400"
-                onClick={() => router.push(`/search?q=${tweet.URL}`)}
+                onClick={() =>
+                  router.push(
+                    `/search?q=${tweet.URL}&tweetNum=${user.tweetNum}`
+                  )
+                }
               >
                 <ArrowTrendingUpIcon className="mr-3 h-5 flex-none text-gray-500 dark:text-gray-50" />
                 {tweet.title}

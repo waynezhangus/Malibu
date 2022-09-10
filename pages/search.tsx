@@ -11,7 +11,7 @@ interface Props {
 export default function Search({ tweet }: Props) {
   React.useEffect(() => {
     const userJson = localStorage.getItem('user');
-    const localUser = userJson ? JSON.parse(userJson) : {};
+    const localUser = userJson ? JSON.parse(userJson) : null;
     if (
       localUser?.theme === false ||
       (!localUser && window.matchMedia('(prefers-color-scheme: light)').matches)
@@ -45,7 +45,7 @@ export default function Search({ tweet }: Props) {
 export async function getServerSideProps(context: any) {
   const res = await fetch(
     'https://malibu-server1.herokuapp.com/tweet?' +
-      new URLSearchParams({ url: context.query.q })
+      new URLSearchParams({ url: context.query.q, tweetNum: context.query.num })
   );
   let data;
   if (res.ok) {
