@@ -1,13 +1,16 @@
 import * as React from 'react';
 import SectionComponent from './Section';
-import { Tweet } from '../typings';
+import { Tweet, User } from '../typings';
 
 interface Props {
   tweet: Tweet;
+  user: User;
 }
 
-export default function TweetComponent({ tweet: oldTweet }: Props) {
+export default function TweetComponent({ tweet: oldTweet, user }: Props) {
   const [tweet, setTweet] = React.useState(oldTweet);
+  const [tweetNum, setTweetNum] = React.useState(user.tweetNum);
+  React.useEffect(() => setTweetNum(user.tweetNum), [user.tweetNum]);
   React.useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(
@@ -27,8 +30,44 @@ export default function TweetComponent({ tweet: oldTweet }: Props) {
       fetchData();
     }
   }, []);
+
+  const onEditTweet = async () => {
+    const res = await fetch(
+      'https://malibu-server1.herokuapp.com/tweet?' +
+        new URLSearchParams({
+          url: tweet.URL,
+          tweetNum: tweetNum.toString(),
+        })
+    );
+    let data;
+    if (res.ok) {
+      data = await res.json();
+      setTweet(data);
+    } else {
+      // console.log(res.status, res.statusText);
+    }
+  };
   return (
     <div className="sm:border-x sm:border-gray-200 dark:sm:border-gray-600">
+      <div className="flex items-center border-b border-gray-200 py-3 px-4 dark:border-zinc-600 dark:text-gray-50">
+        <span className="mr-3 text-sm font-medium">
+          Total number of tweets you would like to see
+        </span>
+        <label className="relative inline-flex flex-1 cursor-pointer items-center">
+          <input
+            className="text-sm focus:outline-none dark:bg-zinc-800"
+            type="number"
+            min="2"
+            max="50"
+            name="tweetNum"
+            value={tweetNum}
+            onChange={(e) => setTweetNum(parseInt(e.target.value))}
+          />
+        </label>
+        <button className="btn p-1.5 dark:bg-zinc-700" onClick={onEditTweet}>
+          Submit
+        </button>
+      </div>
       <SectionComponent
         id={tweet._id + 'title'}
         author={tweet.publisher}

@@ -2,16 +2,28 @@ import Head from 'next/head';
 import * as React from 'react';
 import Header from '../components/Header';
 import TweetComponent from '../components/Tweet';
-import { Tweet } from '../typings';
+import { Tweet, User } from '../typings';
 
 interface Props {
   tweet: Tweet;
 }
 
 export default function Search({ tweet }: Props) {
+  const initUser: User = {
+    theme: true,
+    autoExtend: false,
+    autoShowFeed: true,
+    tweetNum: 5,
+  };
+  const [user, setUser] = React.useState(initUser);
   React.useEffect(() => {
     const userJson = localStorage.getItem('user');
     const localUser = userJson ? JSON.parse(userJson) : null;
+    if (localUser) {
+      setUser(localUser);
+    } else {
+      localStorage.setItem('user', JSON.stringify(user));
+    }
     if (
       localUser?.theme === false ||
       (!localUser && window.matchMedia('(prefers-color-scheme: light)').matches)
@@ -36,7 +48,7 @@ export default function Search({ tweet }: Props) {
       </Head>
       <Header showTitle="search" />
       <main className="max-w-3xl sm:pl-40">
-        <TweetComponent tweet={tweet} />
+        <TweetComponent tweet={tweet} user={user} />
       </main>
     </div>
   );

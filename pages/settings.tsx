@@ -107,7 +107,7 @@ export default function SettingsComponent() {
               className="text-sm focus:outline-none dark:bg-zinc-800"
               type="number"
               min="2"
-              max="10"
+              max="50"
               name="tweetNum"
               value={user.tweetNum}
               onChange={(e) =>
