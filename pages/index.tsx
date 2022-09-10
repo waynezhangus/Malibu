@@ -27,7 +27,7 @@ export default function Home() {
   const search = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!input.length) return;
-    router.push(`/search?q=${input}&num=${user.tweetNum}`);
+    router.push(`/search?q=${input}&tweetNum=${user.tweetNum}`);
   };
 
   React.useEffect(() => {

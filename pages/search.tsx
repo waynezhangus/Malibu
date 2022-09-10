@@ -45,7 +45,10 @@ export default function Search({ tweet }: Props) {
 export async function getServerSideProps(context: any) {
   const res = await fetch(
     'https://malibu-server1.herokuapp.com/tweet?' +
-      new URLSearchParams({ url: context.query.q, tweetNum: context.query.num })
+      new URLSearchParams({
+        url: context.query.q,
+        tweetNum: context.query.tweetNum,
+      })
   );
   let data;
   if (res.ok) {
