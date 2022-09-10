@@ -72,7 +72,7 @@ export default function Header({ showTitle = 'search' }) {
           </form>
         )}
         <Avatar
-          className="ml-auto sm:ml-20"
+          className="ml-auto flex-none sm:ml-20"
           url={
             'https://yt3.ggpht.com/m8od2OcBuHTpgbmzGf1w0JXfb3e3hPJVTkaw8zyV86zO-ULTDQeiJMej8hx396BERzqfgRaMAQ=s88-c-k-c0x00ffffff-no-rj-mo'
           }
