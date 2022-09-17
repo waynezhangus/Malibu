@@ -11,7 +11,7 @@ export default function Avatar({ url, className }: Props) {
   return (
     <div className={`relative ${className}`}>
       {menuOpen && (
-        <ul className="absolute right-0 top-8 w-20 rounded-md p-2 text-center text-sm dark:bg-zinc-700 dark:text-gray-50 dark:hover:bg-zinc-600">
+        <ul className="absolute right-0 top-8 w-20 rounded-md bg-[#f8f9fa] p-2 text-center  text-sm shadow-md dark:bg-zinc-700 dark:text-gray-50 dark:hover:bg-zinc-600">
           <li>
             <Link href={'/settings'}>
               <a>Settings</a>

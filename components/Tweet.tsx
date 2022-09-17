@@ -1,6 +1,7 @@
 import * as React from 'react';
 import SectionComponent from './Section';
 import { Tweet, User } from '../typings';
+import Slider from './Slider';
 
 interface Props {
   tweet: Tweet;
@@ -32,8 +33,9 @@ export default function TweetComponent({ tweet: oldTweet, user }: Props) {
   }, []);
 
   const onEditTweet = async () => {
+    console.log(tweetNum);
     const res = await fetch(
-      'https://malibu-server1.herokuapp.com/tweet?' +
+      'https://malibu-server1.herokuapp.com/tweetEdit?' +
         new URLSearchParams({
           url: tweet.URL,
           tweetNum: tweetNum.toString(),
@@ -47,26 +49,40 @@ export default function TweetComponent({ tweet: oldTweet, user }: Props) {
       // console.log(res.status, res.statusText);
     }
   };
+  const valueText = (value: number) => {
+    return `${value} seconds`;
+  };
+  const valueLabel = (value: number) => {
+    return `${value}s`;
+  };
+
+  const maxSeconds = tweet.numWords / 4;
   return (
     <div className="sm:border-x sm:border-gray-200 dark:sm:border-gray-600">
-      <div className="flex items-center border-b border-gray-200 py-3 px-4 dark:border-zinc-600 dark:text-gray-50">
-        <span className="mr-3 text-sm font-medium">
-          Total number of tweets you would like to see
-        </span>
-        <label className="relative inline-flex flex-1 cursor-pointer items-center">
-          <input
-            className="text-sm focus:outline-none dark:bg-zinc-800"
-            type="number"
-            min="2"
-            max="50"
+      <div className="flex flex-col space-y-5 border-b border-gray-200 px-4 pt-3 dark:border-zinc-600 dark:text-gray-50">
+        <div className="flex items-center justify-between">
+          <span className="text-sm font-medium">Estimated reading time</span>
+          <button className="btn p-1.5 dark:bg-zinc-700" onClick={onEditTweet}>
+            Submit
+          </button>
+        </div>
+        <div className="px-2">
+          <Slider
+            step={30}
+            defaultValue={(maxSeconds * user.tweetNum) / 100}
+            max={maxSeconds}
+            min={30}
+            marks
             name="tweetNum"
-            value={tweetNum}
-            onChange={(e) => setTweetNum(parseInt(e.target.value))}
+            value={Math.round(((tweetNum / 100) * maxSeconds) / 30) * 30}
+            onChange={(event, value) => {
+              setTweetNum(Math.round(((value as number) / maxSeconds) * 100));
+            }}
+            valueLabelDisplay="auto"
+            getAriaValueText={valueText}
+            valueLabelFormat={valueLabel}
           />
-        </label>
-        <button className="btn p-1.5 dark:bg-zinc-700" onClick={onEditTweet}>
-          Submit
-        </button>
+        </div>
       </div>
       <SectionComponent
         id={tweet._id + 'title'}

@@ -26,6 +26,7 @@ export interface Tweet {
   URL: string;
   updatedAt: string;
   visitedCnt: number;
+  numWords: number;
   title: string;
   subtitle?: string;
   time: string;
