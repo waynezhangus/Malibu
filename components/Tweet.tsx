@@ -2,6 +2,7 @@ import * as React from 'react';
 import SectionComponent from './Section';
 import { Tweet, User } from '../typings';
 import Slider from './Slider';
+import toast, { Toaster } from 'react-hot-toast';
 
 interface Props {
   tweet: Tweet;
@@ -33,7 +34,7 @@ export default function TweetComponent({ tweet: oldTweet, user }: Props) {
   }, []);
 
   const onEditTweet = async () => {
-    console.log(tweetNum);
+    const refreshToast = toast.loading('Refreshing...');
     const res = await fetch(
       'https://malibu-server1.herokuapp.com/tweetEdit?' +
         new URLSearchParams({
@@ -45,6 +46,7 @@ export default function TweetComponent({ tweet: oldTweet, user }: Props) {
     if (res.ok) {
       data = await res.json();
       setTweet(data);
+      toast.success('Tweets Updated!', { id: refreshToast });
     } else {
       // console.log(res.status, res.statusText);
     }
@@ -111,6 +113,11 @@ export default function TweetComponent({ tweet: oldTweet, user }: Props) {
             end={index == tweet.sections.length - 1 ? true : false}
           />
         ))}
+      <Toaster
+        toastOptions={{
+          className: 'dark:bg-zinc-700 dark:text-gray-50',
+        }}
+      />
     </div>
   );
 }
