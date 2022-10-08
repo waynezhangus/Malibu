@@ -50,7 +50,7 @@ export default function Article({ error, tweet }: Props) {
   return (
     <div className="w-full dark:bg-zinc-900">
       <Head>
-        <title>Analyze Results</title>
+        <title>Article</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header showTitle="search" />

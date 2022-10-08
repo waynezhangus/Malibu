@@ -9,10 +9,12 @@ export default function ErrorPage() {
   const errorText = {
     tweet: 'The article you requested can not be parsed.',
     dev: 'The current page is under construction.',
+    search: 'Your search did not match any articles.',
   };
   const errorPic = {
     tweet: '/images/parse.png',
     dev: '/images/construction.png',
+    search: '/images/search.png',
   };
   return (
     <div className="h-screen w-full overflow-hidden dark:bg-zinc-900">

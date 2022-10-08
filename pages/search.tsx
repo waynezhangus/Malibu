@@ -1,6 +1,62 @@
-import Head from 'next/head';
 import * as React from 'react';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import Header from '../components/Header';
+import { Tweet, User } from '../typings';
+
+interface Props {
+  error?: string;
+  tweets: Tweet[];
+}
+
+export default function SearchPage({ error, tweets }: Props) {
+  const router = useRouter();
+  if (error || tweets.length == 0) {
+    router.push(`/error?code=search`);
+    return;
+  }
+  const initUser: User = {
+    theme: true,
+    autoExtend: false,
+    autoShowFeed: true,
+    tweetNum: 5,
+  };
+  const [user, setUser] = React.useState(initUser);
+  React.useEffect(() => {
+    const userJson = localStorage.getItem('user');
+    const localUser = userJson ? JSON.parse(userJson) : null;
+    if (localUser) {
+      setUser(localUser);
+    } else {
+      localStorage.setItem('user', JSON.stringify(user));
+    }
+    if (
+      localUser?.theme === false ||
+      (!localUser && window.matchMedia('(prefers-color-scheme: light)').matches)
+    ) {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+    window
+      .matchMedia('(prefers-color-scheme: light)')
+      .addEventListener('change', (event) => {
+        if (event.matches) document.documentElement.classList.remove('dark');
+        else document.documentElement.classList.add('dark');
+      });
+  }, []);
+
+  return (
+    <div className="w-full dark:bg-zinc-900">
+      <Head>
+        <title>Search Results</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Header showTitle="search" />
+      <main className="max-w-3xl sm:pl-40"></main>
+    </div>
+  );
+}
 
 export async function getServerSideProps(context: any) {
   const res = await fetch(
@@ -12,12 +68,17 @@ export async function getServerSideProps(context: any) {
   let data;
   if (res.ok) {
     data = await res.json();
+    return {
+      props: {
+        tweets: data,
+      },
+    };
   } else {
     // console.log(res.status, res.statusText);
+    return {
+      props: {
+        error: 'search',
+      },
+    };
   }
-  return {
-    props: {
-      tweet: data,
-    },
-  };
 }
