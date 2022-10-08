@@ -24,7 +24,7 @@ export default function ErrorPage() {
       </Head>
       <Header showTitle="error" />
       <main className="h-full max-w-3xl dark:text-gray-50 sm:mx-auto sm:border-x sm:border-gray-200 dark:sm:border-gray-600">
-        <div className="flex items-center justify-evenly pt-16">
+        <div className="flex flex-col items-center space-y-6 pt-16 md:flex-row md:justify-evenly md:space-y-0">
           <img
             src={errorPic[code as keyof typeof errorPic]}
             alt="Error Picture"

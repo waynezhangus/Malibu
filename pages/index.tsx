@@ -231,7 +231,7 @@ export default function Home() {
                 className="flex cursor-pointer items-center border-b py-3 dark:border-gray-400"
                 onClick={() =>
                   router.push(
-                    `/search?q=${tweet.URL}&tweetNum=${user.tweetNum}`
+                    `/article?url=${tweet.URL}&tweetNum=${user.tweetNum}`
                   )
                 }
               >
