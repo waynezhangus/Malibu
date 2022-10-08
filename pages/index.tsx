@@ -24,12 +24,15 @@ export default function Home() {
   const [user, setUser] = React.useState(initUser);
   const [showFeed, setShowFeed] = React.useState(false);
   const [tweets, setTweets] = React.useState<Tweet[] | null>(null);
+  // search function
   const search = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!input.length) return;
-    router.push(`/search?q=${input}&tweetNum=${user.tweetNum}`);
+    if (input.includes('www.popsci.com'))
+      router.push(`/article?url=${input}&tweetNum=${user.tweetNum}`);
+    else router.push(`/search?q=${input}`);
   };
-
+  // toggle theme
   React.useEffect(() => {
     const userJson = localStorage.getItem('user');
     const localUser = userJson ? JSON.parse(userJson) : null;
@@ -54,7 +57,7 @@ export default function Home() {
         else document.documentElement.classList.add('dark');
       });
   }, []);
-
+  // get feeds
   React.useEffect(() => {
     const fetchData = async () => {
       const res = await fetch('https://malibu-server1.herokuapp.com/tweets');
@@ -86,7 +89,9 @@ export default function Home() {
       </video>
       <header className="flex w-full justify-between p-5 pl-8 text-sm text-gray-700 dark:text-gray-50">
         <div className="flex items-center space-x-4">
-          <a className="link">About</a>
+          <a className="link" onClick={() => router.push(`/error?code=dev`)}>
+            About
+          </a>
           <a className="link" onClick={() => router.push('settings')}>
             Settings
           </a>
@@ -100,11 +105,7 @@ export default function Home() {
           >
             Twitter
           </a>
-          <Avatar
-            url={
-              'http://pbs.twimg.com/profile_images/1540186755101405189/Jo_ylk3K_normal.jpg'
-            }
-          />
+          <Avatar />
         </div>
       </header>
       <form
@@ -114,14 +115,14 @@ export default function Home() {
         <div className="hidden dark:block">
           <img
             className="h-16 md:h-24"
-            src="/images/logowhite.png" // Route of the image file
+            src="/images/logowhite.png"
             alt="Malibu Logo"
           />
         </div>
         <div className="dark:hidden">
           <img
             className="h-16 md:h-24"
-            src="/images/logotrans.png" // Route of the image file
+            src="/images/logotrans.png"
             alt="Malibu Logo"
           />
         </div>
@@ -147,21 +148,22 @@ export default function Home() {
         </div>
         <div className="mt-8 hidden w-1/2 justify-center md:flex md:flex-row md:space-x-4">
           <button onClick={search} type="submit" className="btn">
-            Smart Analyze
+            Global Search
           </button>
-          <button className="btn">
-            <a href={input} target="_blank" rel="noreferrer">
-              Original Website
-            </a>
+          <button
+            onClick={() => router.push(`/error?code=dev`)}
+            className="btn"
+          >
+            Random Article
           </button>
         </div>
       </form>
 
       <div className="relative m-4 hidden md:block">
+        {/* Feed, >sm */}
         {showFeed && (
           <div className="absolute z-10 h-48 w-full animate-[move_2s_forwards_ease-in-out] bg-white dark:hidden"></div>
         )}
-
         {tweets && (
           <div
             className={`flex space-x-2 ${
@@ -197,6 +199,7 @@ export default function Home() {
         </label>
       </div>
 
+      {/* Feed, sm */}
       <div className="relative mt-4 w-[80%] flex-grow md:hidden">
         <label
           htmlFor="showFeed"

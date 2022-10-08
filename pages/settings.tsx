@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import { User } from '../typings';
 import Slider from '../components/Slider';
 
-export default function SettingsComponent() {
+export default function SettingsPage() {
   const initUser: User = {
     theme: true,
     autoExtend: false,

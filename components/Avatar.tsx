@@ -2,11 +2,14 @@ import * as React from 'react';
 import Link from 'next/link';
 
 interface Props {
-  url: string;
+  url?: string;
   className?: string;
 }
 
-export default function Avatar({ url, className }: Props) {
+export default function Avatar({
+  url = '/images/user.png',
+  className = '',
+}: Props) {
   const [menuOpen, setMenuOpen] = React.useState(false);
   return (
     <div className={`relative ${className}`}>
@@ -21,7 +24,7 @@ export default function Avatar({ url, className }: Props) {
       )}
       <img
         loading="lazy"
-        className={`h-8 cursor-pointer rounded-full transition-transform duration-150 hover:scale-110`}
+        className={`h-8 w-8 cursor-pointer rounded-full bg-transparent object-cover transition-transform duration-150 hover:scale-110`}
         src={url}
         alt="profile pic"
         onClick={() => setMenuOpen(!menuOpen)}

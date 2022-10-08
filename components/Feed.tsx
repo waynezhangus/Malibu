@@ -11,8 +11,10 @@ export default function Feed({ tweet, tweetNum }: Props) {
   const router = useRouter();
   return (
     <div
-      className="flex h-48 max-w-[220px] cursor-pointer flex-col space-y-1.5 rounded-2xl bg-gray-100 p-3 hover:bg-gray-200 dark:bg-gray-600 dark:hover:bg-gray-700"
-      onClick={() => router.push(`/search?q=${tweet.URL}&tweetNum=${tweetNum}`)}
+      className="flex h-48 max-w-[220px] cursor-pointer flex-col space-y-1.5 rounded-lg bg-gray-100 p-3 hover:bg-gray-200 dark:bg-gray-600 dark:hover:bg-gray-700"
+      onClick={() =>
+        router.push(`/article?url=${tweet.URL}&tweetNum=${tweetNum}`)
+      }
     >
       <div className="text-sm text-gray-500 dark:text-gray-300">
         {tweet.title}

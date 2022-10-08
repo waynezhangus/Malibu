@@ -40,6 +40,11 @@ export default function Header({ showTitle = 'search' }) {
             onClick={() => router.push('/')}
           />
         </div>
+        {showTitle == 'error' && (
+          <div className="mx-auto hidden text-xl font-medium tracking-wide text-sky-400 dark:text-gray-50 sm:inline-block">
+            We are sorry!
+          </div>
+        )}
         {showTitle == 'settings' && (
           <div className="mx-auto hidden text-xl font-medium tracking-wide text-sky-400 dark:text-gray-50 sm:inline-block">
             User Settings
@@ -71,14 +76,14 @@ export default function Header({ showTitle = 'search' }) {
             <button hidden type="submit" onClick={search}></button>
           </form>
         )}
-        <Avatar
-          className="ml-auto flex-none sm:ml-20"
-          url={
-            'https://yt3.ggpht.com/m8od2OcBuHTpgbmzGf1w0JXfb3e3hPJVTkaw8zyV86zO-ULTDQeiJMej8hx396BERzqfgRaMAQ=s88-c-k-c0x00ffffff-no-rj-mo'
-          }
-        />
+        <Avatar className="ml-auto flex-none sm:ml-20" />
       </div>
       <div className="w-full">
+        {showTitle == 'error' && (
+          <div className="mb-2 text-center text-xl font-medium tracking-wide text-sky-400 dark:text-gray-50 sm:hidden">
+            We are sorry!
+          </div>
+        )}
         {showTitle == 'settings' && (
           <div className="mb-2 text-center text-xl font-medium tracking-wide text-sky-400 dark:text-gray-50 sm:hidden">
             User Settings

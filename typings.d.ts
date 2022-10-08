@@ -6,6 +6,7 @@ interface User {
 }
 
 interface Entity {
+  name: string;
   userName: string;
   screenName?: string;
   profileImg: string;
