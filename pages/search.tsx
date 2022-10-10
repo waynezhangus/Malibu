@@ -57,7 +57,7 @@ export default function SearchPage({ error, tweets }: Props) {
       <main className="max-w-4xl p-6 dark:text-gray-50 sm:mx-auto sm:border-x sm:border-gray-200 dark:sm:border-gray-600">
         {tweets && (
           <div
-            className={`flex flex-wrap content-start items-center justify-center`}
+            className={`flex min-h-[560px] flex-wrap content-start items-center justify-center`}
           >
             {tweets.map((tweet, index) => (
               <SearchItem
