@@ -7,13 +7,14 @@ import { Tweet, User } from '../typings';
 
 interface Props {
   error?: string;
+  url?: string;
   tweet: Tweet;
 }
 
-export default function Article({ error, tweet }: Props) {
+export default function Article({ error, url, tweet }: Props) {
   const router = useRouter();
   if (error) {
-    router.push(`/error?code=${error}`);
+    router.push(`/error?code=${error}&url=${url}`);
     return;
   }
   const initUser: User = {
@@ -82,6 +83,7 @@ export async function getServerSideProps(context: any) {
     return {
       props: {
         error: 'tweet',
+        url: context.query.url,
       },
     };
   }
