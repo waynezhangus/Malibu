@@ -53,7 +53,7 @@ export default function Article({ error, tweet }: Props) {
         <title>Article</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header showTitle="search" />
+      <Header userInput={router.query.url as string} />
       <main className="max-w-3xl sm:pl-40">
         <TweetComponent tweet={tweet} user={user} />
       </main>

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Entity, Point } from '../typings';
 import SubSection from './SubSection';
 import TimeAgo from 'react-timeago';
-import { useRouter } from 'next/router';
 import {
   ChatBubbleOvalLeftIcon,
   HeartIcon,
@@ -105,7 +104,7 @@ export default function SectionComponent({
             @{author.screenName}
           </a>
           {time && (
-            <div>
+            <div className="pb-[3px]">
               <span className="text-sm text-gray-500">&middot;&nbsp;</span>
               <TimeAgo className="text-sm text-gray-500" date={time} />
             </div>

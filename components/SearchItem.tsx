@@ -8,29 +8,29 @@ interface Props {
   tweetNum: number;
 }
 
-export default function Feed({ tweet, tweetNum }: Props) {
+export default function SearchItem({ tweet, tweetNum }: Props) {
   const router = useRouter();
   return (
     <div
-      className="flex h-48 max-w-[220px] cursor-pointer flex-col space-y-1 rounded-lg bg-gray-100 p-3 hover:bg-gray-200 dark:bg-gray-600 dark:hover:bg-gray-700"
+      className="flex h-64 max-w-[300px] cursor-pointer flex-col space-y-1 p-6 hover:bg-gray-100 dark:hover:bg-zinc-800 sm:max-w-[280px]"
       onClick={() =>
         router.push(`/article?url=${tweet.URL}&tweetNum=${tweetNum}`)
       }
     >
-      <div className="text-sm text-gray-500 dark:text-gray-300">
-        {tweet.title}
-      </div>
-      <div className="hidden text-xs text-gray-500 dark:text-gray-300 lg:flex">
-        {tweet.publisher.name}
-        <span className="pl-1">&middot;&nbsp;</span>
-        <TimeAgo date={tweet.time} />
-      </div>
       <div className="min-h-0 grow">
         <img
           className="h-full w-full rounded-lg object-cover"
           src={tweet.image}
           alt=""
         />
+      </div>
+      <div className="hidden text-xs text-gray-500 dark:text-gray-300 lg:flex">
+        {tweet.publisher.name}
+        <span className="pl-1">&middot;&nbsp;</span>
+        <TimeAgo date={tweet.time} />
+      </div>
+      <div className="h-10 text-sm text-gray-500 dark:text-gray-300">
+        {tweet.title}
       </div>
     </div>
   );

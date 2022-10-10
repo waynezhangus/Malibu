@@ -28,7 +28,7 @@ export default function TweetComponent({ tweet: oldTweet, user }: Props) {
         console.log(res.status, res.statusText);
       }
     };
-    if ((Date.now() - Date.parse(tweet.updatedAt)) / 1000 > 12 * 3600) {
+    if ((Date.now() - Date.parse(tweet.updatedAt)) / 1000 > 24 * 3600) {
       fetchData();
     }
   }, []);
@@ -52,10 +52,10 @@ export default function TweetComponent({ tweet: oldTweet, user }: Props) {
     }
   };
   const valueText = (value: number) => {
-    return `${value} seconds`;
+    return `${(value / 60).toFixed(1)} minutes`;
   };
   const valueLabel = (value: number) => {
-    return `${value}s`;
+    return `${(value / 60).toFixed(1)}m`;
   };
 
   const maxSeconds = tweet.numWords / 4;

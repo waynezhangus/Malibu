@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 import Avatar from './Avatar';
 
-export default function Header({ showTitle = 'search' }) {
+export default function Header({ showTitle = 'search', userInput = '' }) {
   const router = useRouter();
-  const [input, setInput] = React.useState('');
+  const [input, setInput] = React.useState(userInput);
   const search = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!input.length) return;
@@ -59,7 +59,6 @@ export default function Header({ showTitle = 'search' }) {
             <input
               value={input}
               type="search"
-              autoComplete="on"
               name="URL"
               className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
               onChange={(e) => setInput(e.target.value)}
@@ -98,7 +97,6 @@ export default function Header({ showTitle = 'search' }) {
             <input
               value={input}
               type="search"
-              autoComplete="on"
               name="URL"
               className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
               onChange={(e) => setInput(e.target.value)}

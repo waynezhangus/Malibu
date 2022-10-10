@@ -135,7 +135,6 @@ export default function Home() {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            autoComplete="on"
             name="URL"
             type="search"
             className="flex-grow focus:outline-none dark:bg-transparent dark:text-gray-50 dark:caret-white"
