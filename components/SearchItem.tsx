@@ -24,7 +24,7 @@ export default function SearchItem({ tweet, tweetNum }: Props) {
           alt=""
         />
       </div>
-      <div className="hidden text-xs text-gray-500 dark:text-gray-300 lg:flex">
+      <div className="flex text-xs text-gray-500 dark:text-gray-300">
         {tweet.publisher.name}
         <span className="pl-1">&middot;&nbsp;</span>
         <TimeAgo date={tweet.time} />
