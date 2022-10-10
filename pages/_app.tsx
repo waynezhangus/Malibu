@@ -26,7 +26,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SessionProvider session={pageProps.session}>
       {loading ? (
-        <div className="h-screen w-screen dark:bg-[#202124]">
+        <div className="h-screen w-screen dark:bg-zinc-900">
           <Header />
           <div className="pt-20 text-center">
             <svg

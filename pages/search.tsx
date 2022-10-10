@@ -48,13 +48,13 @@ export default function SearchPage({ error, tweets }: Props) {
   }, []);
 
   return (
-    <div className="h-screen w-full overflow-hidden dark:bg-zinc-900">
+    <div className="w-full dark:bg-zinc-900">
       <Head>
         <title>Search Results</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header userInput={router.query.q as string} />
-      <main className="h-full max-w-4xl border-b p-6 dark:text-gray-50 sm:mx-auto sm:border-x sm:border-gray-200 dark:sm:border-gray-600">
+      <main className="max-w-4xl p-6 dark:text-gray-50 sm:mx-auto sm:border-x sm:border-gray-200 dark:sm:border-gray-600">
         {tweets && (
           <div
             className={`flex flex-wrap content-start items-center justify-center`}
