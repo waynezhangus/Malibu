@@ -2,15 +2,27 @@ import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as React from 'react';
+import { User } from '../typings';
 import Avatar from './Avatar';
 
-export default function Header({ showTitle = 'search', userInput = '' }) {
+interface Props {
+  showTitle?: string;
+  userInput?: string;
+  user?: User;
+}
+
+export default function Header({
+  showTitle = 'search',
+  userInput = '',
+  user,
+}: Props) {
   const router = useRouter();
   const [input, setInput] = React.useState(userInput);
   const search = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!input.length) return;
-    router.push(`/search?q=${input}`);
+    if (input.includes('www.popsci.com'))
+      router.push(`/article?url=${input}&tweetNum=${user?.tweetNum}`);
+    else router.push(`/search?q=${input}`);
   };
 
   return (

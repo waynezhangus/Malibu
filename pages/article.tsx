@@ -54,7 +54,7 @@ export default function Article({ error, url, tweet }: Props) {
         <title>Article</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header userInput={router.query.url as string} />
+      <Header userInput={router.query.url as string} user={user} />
       <main className="max-w-3xl sm:pl-40">
         <TweetComponent tweet={tweet} user={user} />
       </main>

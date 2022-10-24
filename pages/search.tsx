@@ -53,7 +53,7 @@ export default function SearchPage({ error, tweets }: Props) {
         <title>Search Results</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header userInput={router.query.q as string} />
+      <Header userInput={router.query.q as string} user={user} />
       <main className="max-w-4xl p-6 dark:text-gray-50 sm:mx-auto sm:border-x sm:border-gray-200 dark:sm:border-gray-600">
         {tweets && (
           <div

@@ -163,7 +163,7 @@ export default function SectionComponent({
             </div>
           )}
 
-        <div className="mt-3 flex justify-between">
+        {/* <div className="mt-3 flex justify-between">
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400">
             <ChatBubbleOvalLeftIcon className="h-5 w-5" />
             <p className="pt-0.5 text-sm">5</p>
@@ -177,7 +177,7 @@ export default function SectionComponent({
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400">
             <ArrowUturnLeftIcon className="h-5 w-5" />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
