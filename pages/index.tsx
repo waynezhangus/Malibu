@@ -175,7 +175,7 @@ export default function Home() {
             }`}
           >
             {tweets.map((tweet, index) => (
-              <Feed key={tweet._id} tweet={tweet} tweetNum={user.tweetNum} />
+              <Feed key={tweet._id} tweet={tweet} user={user} />
             ))}
           </div>
         )}
@@ -233,7 +233,7 @@ export default function Home() {
                 className="flex cursor-pointer items-center border-b py-3 dark:border-gray-400"
                 onClick={() =>
                   router.push(
-                    `/article?url=${tweet.URL}&tweetNum=${user.tweetNum}`
+                    `/article?url=${tweet.URL}&tweetNum=${user.tweetNum}&tweetLen=${user.tweetLen}`
                   )
                 }
               >

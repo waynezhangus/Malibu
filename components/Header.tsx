@@ -21,7 +21,9 @@ export default function Header({
   const search = (e: React.MouseEvent) => {
     e.preventDefault();
     if (input.includes('www.popsci.com'))
-      router.push(`/article?url=${input}&tweetNum=${user?.tweetNum}`);
+      router.push(
+        `/article?url=${input}&tweetNum=${user?.tweetNum}&tweetLen=${user?.tweetLen}`
+      );
     else router.push(`/search?q=${input}`);
   };
 
