@@ -1,20 +1,22 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
 import TimeAgo from 'react-timeago';
-import { Tweet } from '../typings';
+import { Tweet, User } from '../typings';
 
 interface Props {
   tweet: Tweet;
-  tweetNum: number;
+  user: User;
 }
 
-export default function SearchItem({ tweet, tweetNum }: Props) {
+export default function SearchItem({ tweet, user }: Props) {
   const router = useRouter();
   return (
     <div
       className="flex h-64 max-w-[300px] cursor-pointer flex-col space-y-1 p-6 hover:bg-gray-100 dark:hover:bg-zinc-800 sm:max-w-[280px]"
       onClick={() =>
-        router.push(`/article?url=${tweet.URL}&tweetNum=${tweetNum}`)
+        router.push(
+          `/article?url=${tweet.URL}&tweetNum=${user.tweetNum}&tweetLen=${user.tweetLen}`
+        )
       }
     >
       <div className="min-h-0 grow">

@@ -3,6 +3,7 @@ interface User {
   autoExtend: boolean;
   autoShowFeed: boolean;
   tweetNum: number;
+  tweetLen: number;
 }
 
 interface Entity {

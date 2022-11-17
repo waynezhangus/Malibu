@@ -13,15 +13,16 @@ interface Props {
 
 export default function Article({ error, url, tweet }: Props) {
   const router = useRouter();
-  if (error) {
-    router.push(`/error?code=${error}&url=${url}`);
-    return;
-  }
+  // if (error) {
+  //   router.push(`/error?code=${error}&url=${url}`);
+  //   return;
+  // }
   const initUser: User = {
     theme: true,
     autoExtend: false,
     autoShowFeed: true,
     tweetNum: 5,
+    tweetLen: 140,
   };
   const [user, setUser] = React.useState(initUser);
   React.useEffect(() => {
@@ -63,11 +64,20 @@ export default function Article({ error, url, tweet }: Props) {
 }
 
 export async function getServerSideProps(context: any) {
+  console.log(
+    'https://malibu-server1.herokuapp.com/tweet?' +
+      new URLSearchParams({
+        url: context.query.url,
+        tweetNum: context.query.tweetNum,
+        tweetLen: context.query.tweetLen,
+      })
+  );
   const res = await fetch(
     'https://malibu-server1.herokuapp.com/tweet?' +
       new URLSearchParams({
         url: context.query.url,
         tweetNum: context.query.tweetNum,
+        tweetLen: context.query.tweetLen,
       })
   );
   let data;
@@ -79,7 +89,7 @@ export async function getServerSideProps(context: any) {
       },
     };
   } else {
-    // console.log(res.status, res.statusText);
+    console.log(res.status, res.statusText);
     return {
       props: {
         error: 'tweet',

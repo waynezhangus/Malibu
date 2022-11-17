@@ -17,6 +17,7 @@ export default function Home() {
     autoExtend: false,
     autoShowFeed: true,
     tweetNum: 5,
+    tweetLen: 140,
   };
 
   const router = useRouter();
@@ -29,7 +30,9 @@ export default function Home() {
     e.preventDefault();
     if (!input.length) return;
     if (input.includes('www.popsci.com'))
-      router.push(`/article?url=${input}&tweetNum=${user.tweetNum}`);
+      router.push(
+        `/article?url=${input}&tweetNum=${user.tweetNum}&tweetLen=${user.tweetLen}`
+      );
     else router.push(`/search?q=${input}`);
   };
   // toggle theme

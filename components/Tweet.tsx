@@ -52,13 +52,13 @@ export default function TweetComponent({ tweet: oldTweet, user }: Props) {
     }
   };
   const valueText = (value: number) => {
-    return `${(value / 60).toFixed(1)} minutes`;
+    return `${value} minutes`;
   };
   const valueLabel = (value: number) => {
-    return `${(value / 60).toFixed(1)}m`;
+    return `${value}m`;
   };
 
-  const maxSeconds = tweet.numWords / 4;
+  const maxMinutes = Math.ceil(tweet.numWords / 200);
   return (
     <div className="sm:border-x sm:border-gray-200 dark:sm:border-gray-600">
       <div className="flex flex-col space-y-5 border-b border-gray-200 px-4 pt-3 dark:border-zinc-600 dark:text-gray-50">
@@ -70,15 +70,20 @@ export default function TweetComponent({ tweet: oldTweet, user }: Props) {
         </div>
         <div className="px-2">
           <Slider
-            step={30}
-            defaultValue={(maxSeconds * user.tweetNum) / 100}
-            max={maxSeconds}
-            min={30}
+            step={1}
+            defaultValue={(maxMinutes * user.tweetNum) / 100}
+            max={maxMinutes}
+            min={1}
             marks
             name="tweetNum"
-            value={Math.round(((tweetNum / 100) * maxSeconds) / 30) * 30}
+            value={Math.round((maxMinutes * tweetNum) / 100)}
             onChange={(event, value) => {
-              setTweetNum(Math.round(((value as number) / maxSeconds) * 100));
+              setTweetNum(
+                Math.min(
+                  Math.round(((value as number) / maxMinutes) * 100),
+                  100
+                )
+              );
             }}
             valueLabelDisplay="auto"
             getAriaValueText={valueText}

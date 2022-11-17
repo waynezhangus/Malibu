@@ -10,6 +10,7 @@ export default function SettingsPage() {
     autoExtend: false,
     autoShowFeed: true,
     tweetNum: 5,
+    tweetLen: 140,
   };
   const [user, setUser] = React.useState(initUser);
   const onMount = React.useRef(true);
@@ -60,7 +61,7 @@ export default function SettingsPage() {
         <div
           className={`flex flex-col space-y-5 border-b border-gray-200 p-6 dark:border-zinc-600`}
         >
-          <div className="mb-1">Display Settings</div>
+          {/* <div className="mb-1">Display Settings</div> */}
           <label className="relative inline-flex cursor-pointer items-center">
             <input
               type="checkbox"
@@ -109,12 +110,12 @@ export default function SettingsPage() {
           </label>
         </div>
         <div className={`flex flex-col space-y-5 p-6`}>
-          <div className="mb-1">Parser Settings</div>
+          {/* <div className="mb-1">Parser Settings</div> */}
           <label className="relative inline-flex flex-col space-y-7">
             <span className="text-sm font-medium">
               Percentage of the article to display by default
             </span>
-            <div className="w-80">
+            <div className="ml-1 w-80">
               <Slider
                 step={20}
                 defaultValue={20}
@@ -129,6 +130,26 @@ export default function SettingsPage() {
                 valueLabelDisplay="auto"
                 getAriaValueText={valueText}
                 valueLabelFormat={valueLabel}
+              />
+            </div>
+          </label>
+          <label className="relative inline-flex flex-col space-y-7">
+            <span className="text-sm font-medium">
+              Max characters of each tweet by default
+            </span>
+            <div className="ml-1 w-80">
+              <Slider
+                step={140}
+                defaultValue={140}
+                max={420}
+                min={140}
+                marks
+                name="tweetLen"
+                value={user.tweetLen}
+                onChange={(event, value) => {
+                  setUser({ ...user, tweetLen: value as number });
+                }}
+                valueLabelDisplay="auto"
               />
             </div>
           </label>

@@ -21,6 +21,7 @@ export default function SearchPage({ error, tweets }: Props) {
     autoExtend: false,
     autoShowFeed: true,
     tweetNum: 5,
+    tweetLen: 140,
   };
   const [user, setUser] = React.useState(initUser);
   React.useEffect(() => {
@@ -60,11 +61,7 @@ export default function SearchPage({ error, tweets }: Props) {
             className={`flex min-h-[560px] flex-wrap content-start items-center justify-center`}
           >
             {tweets.map((tweet, index) => (
-              <SearchItem
-                key={tweet._id}
-                tweet={tweet}
-                tweetNum={user.tweetNum}
-              />
+              <SearchItem key={tweet._id} tweet={tweet} user={user} />
             ))}
           </div>
         )}

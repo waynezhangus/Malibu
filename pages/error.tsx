@@ -13,6 +13,7 @@ export default function ErrorPage() {
     autoExtend: false,
     autoShowFeed: true,
     tweetNum: 5,
+    tweetLen: 140,
   };
   const [user, setUser] = React.useState(initUser);
   React.useEffect(() => {
