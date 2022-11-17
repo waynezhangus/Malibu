@@ -13,10 +13,10 @@ interface Props {
 
 export default function Article({ error, url, tweet }: Props) {
   const router = useRouter();
-  // if (error) {
-  //   router.push(`/error?code=${error}&url=${url}`);
-  //   return;
-  // }
+  if (error) {
+    router.push(`/error?code=${error}&url=${url}`);
+    return;
+  }
   const initUser: User = {
     theme: true,
     autoExtend: false,
@@ -64,14 +64,14 @@ export default function Article({ error, url, tweet }: Props) {
 }
 
 export async function getServerSideProps(context: any) {
-  console.log(
-    'https://malibu-server1.herokuapp.com/tweet?' +
-      new URLSearchParams({
-        url: context.query.url,
-        tweetNum: context.query.tweetNum,
-        tweetLen: context.query.tweetLen,
-      })
-  );
+  // console.log(
+  //   'https://malibu-server1.herokuapp.com/tweet?' +
+  //     new URLSearchParams({
+  //       url: context.query.url,
+  //       tweetNum: context.query.tweetNum,
+  //       tweetLen: context.query.tweetLen,
+  //     })
+  // );
   const res = await fetch(
     'https://malibu-server1.herokuapp.com/tweet?' +
       new URLSearchParams({
